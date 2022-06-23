@@ -120,6 +120,7 @@ button {
   margin-left: 5px;
   padding: 0 1rem;
 }
+.ProseMirror ol li,
 .ProseMirror ul li{
   padding-left: 2px;
 }
@@ -128,7 +129,6 @@ button {
   list-style: none;
   margin: 10px 0;
   padding: 0;
-  /*padding: 0 0 0 0.9em;*/
 }
 
 .ProseMirror ul[data-type='taskList'] li {
@@ -185,6 +185,10 @@ button {
   font-size: 0.8rem;
 }
 
+.ProseMirror:focus-visible{
+  outline: none;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
 
 .ProseMirror img {
   max-width: 100%;

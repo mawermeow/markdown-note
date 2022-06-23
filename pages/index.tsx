@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import Hello from '../components/hello/Hello';
-import MarkdownRange from "../components/Markdown/MarkdownRange";
+import MarkdownCard from "../components/Markdown/MarkdownCard";
 
 const Home: NextPage = () => {
   return <>
     {/*<Hello/>*/}
-    <MarkdownRange/>
+    <MarkdownCard/>
   </>
 }
 
