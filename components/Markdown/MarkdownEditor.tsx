@@ -1,17 +1,22 @@
-
-
+import React from 'react'
+import {EditorContent, useEditor, FloatingMenu} from '@tiptap/react'
 import Highlight from '@tiptap/extension-highlight'
 import Typography from '@tiptap/extension-typography'
-import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import React from 'react'
+import TaskItem from '@tiptap/extension-task-item'
+import TaskList from '@tiptap/extension-task-list'
+import FloatingList from "./FloatingList";
+import BubbleList from "./BubbleList";
 
-const MarkdownEditor:React.FC = () => {
+
+const MarkdownEditor: React.FC = () => {
     const editor = useEditor({
         extensions: [
             StarterKit,
             Highlight,
             Typography,
+            TaskList,
+            TaskItem
         ],
         content: `
     <p>
@@ -33,7 +38,11 @@ const MarkdownEditor:React.FC = () => {
     })
 
     return (
-        <EditorContent editor={editor} />
+        <>
+            {editor && <BubbleList editor={editor}/>}
+            {editor && <FloatingList editor={editor}/>}
+            <EditorContent editor={editor}/>
+        </>
     )
 }
 
