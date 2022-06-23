@@ -1,16 +1,158 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto&family=Source+Sans+Pro:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  --color-main-50: hsl(0, 60%, 96%);
+  --color-main-100: hsl(2, 61%, 92%);
+  --color-main-200: hsl(2, 61%, 88%);
+  --color-main-300: hsl(2, 61%, 84%);
+  --color-main-400: hsl(2, 61%, 80%);
+  --color-main-500: hsl(2, 61%, 76%);
+  --color-main-600: hsl(2, 61%, 72%);
+  --color-main-700: hsl(2, 61%, 65%);
+  --color-main-800: hsl(2, 61%, 64%);
+  --color-main-900: hsl(2, 61%, 60%);
+
+  --color-secondary-50: #EBF9FF;
+  --color-secondary-100: #d6f3ff;
+  --color-secondary-200: #99e2ff;
+  --color-secondary-300: #5cd1ff;
+  --color-secondary-400: #1fbfff;
+  --color-secondary-500: #00aff5;
+  --color-secondary-600: #0092cc;
+  --color-secondary-700: #0075a2;
+
+
+  --color-success-100: #F1F9F4;
+  --color-success-500: #499F68;
+
+  --color-error-100: #333333;
+  --color-error-400: #ffe3b4;
+  --color-error-500: #FFD97D;
+  --color-error-600: #ffba00;
+
+  --color-direct-100: white;
+
+  --size-1: 0.25rem;
+  --size-2: 0.5rem;
+  --size-3: 0.75rem;
+  --size-4: 1rem;
+  --size-5: 1.25rem;
+  --size-6: 1.5rem;
+  --size-8: 2rem;
+  --size-16: 4rem;
+  --size-20: 5rem;
+  --size-40: 10rem;
+  --size-main-a1: 25rem;
+  --size-main-a2: 12.3rem;
+
+  margin: 0;
+  background-color: var(--color-main-400);
+  color: #986E5E;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Arial Black', 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.center {
+  text-align: center;
+  margin: var(--size-4) auto;
+}
+
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  body {
+    --size-main-a1: 35rem;
+    --size-main-a2: 17.3rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  body {
+    --size-main-a1: 50rem;
+    --size-main-a2: 24.8rem;
+  }
+}
+
+.ProseMirror{
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 5px 15px;
+  color: black;
+}
+
+.ProseMirror> * + * {
+  margin-top: 0.75em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 1rem;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 1.1;
+}
+
+.ProseMirror code {
+  background-color: rgba(97,97,97, 0.1);
+  color: #616161;
+}
+
+.ProseMirror pre {
+  background: #0D0D0D;
+  color: #FFF;
+  font-family: 'JetBrainsMono', monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;}
+
+.ProseMirror pre code {
+  color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem;
+}
+
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ProseMirror hr {
+  margin: 1rem 0;
+}
+
+.ProseMirror blockquote {
+  border-left: 2px solid rgba(13,13,13, 0.1);
+  padding: 0 10px;
+  margin: 15px 30px 0 4px;
 }
