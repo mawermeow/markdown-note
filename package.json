@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest --run --reporter verbose"
   },
   "dependencies": {
     "@tiptap/extension-color": "^2.0.0-beta.12",
@@ -16,16 +17,21 @@
     "@tiptap/extension-typography": "^2.0.0-beta.22",
     "@tiptap/react": "^2.0.0-beta.113",
     "@tiptap/starter-kit": "^2.0.0-beta.189",
+    "bcryptjs": "^2.4.3",
+    "mongodb": "^4.7.0",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
-    "typescript": "4.7.4"
+    "node-mocks-http": "^1.11.0",
+    "typescript": "4.7.4",
+    "vitest": "^0.15.2"
   }
 }

@@ -5,7 +5,6 @@ import {OrderedList} from "@tiptap/extension-ordered-list";
 import {Code} from "@tiptap/extension-code";
 import {CodeBlock} from "@tiptap/extension-code-block";
 
-
 export const CustomBulletList = BulletList.extend({
     addKeyboardShortcuts() {
         return {

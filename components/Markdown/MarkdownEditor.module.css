@@ -1,0 +1,81 @@
+.editor {
+    background-color: #fff;
+    border: 3px solid #0d0d0d;
+    border-radius: 0.75rem;
+    color: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    /*max-height: 26rem;*/
+}
+.editorHeader {
+     align-items: center;
+     border-bottom: 3px solid #0d0d0d;
+     display: flex;
+     flex: 0 0 auto;
+     flex-wrap: wrap;
+     padding: 0.25rem;
+ }
+
+.editorContent {
+     flex: 1 1 auto;
+     overflow-x: hidden;
+     overflow-y: auto;
+     padding: 1.25rem 1rem;
+     -webkit-overflow-scrolling: touch;
+ }
+
+.editorFooter {
+     align-items: center;
+     border-top: 3px solid #0d0d0d;
+     color: #0d0d0d;
+     display: flex;
+     flex: 0 0 auto;
+     font-size: 12px;
+     flex-wrap: wrap;
+     font-weight: 600;
+     justify-content: space-between;
+     padding: 0.25rem 0.75rem;
+     white-space: nowrap;
+ }
+
+/* Some information about the status */
+.editorStatus {
+    align-items: center;
+    border-radius: 5px;
+    display: flex;
+}
+.editorStatus::before {
+     background: rgba(13,13,13, 0.5);
+     border-radius: 50%;
+     content: " ";
+     display: inline-block;
+     flex: 0 0 auto;
+     height: 0.5rem;
+     margin-right: 0.5rem;
+     width: 0.5rem;
+ }
+
+.editorStatusConnecting::before {
+     background: #616161;
+ }
+
+.editorStatusConnected::before {
+     background: #b9f18d;
+ }
+
+
+
+.editorName button {
+    background: none;
+    border: none;
+    border-radius: 0.4rem;
+    color: #0d0d0d;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+}
+.editorName button:hover {
+     background-color: #0d0d0d;
+     color: #fff;
+ }
