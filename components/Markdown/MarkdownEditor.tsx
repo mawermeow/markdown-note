@@ -13,6 +13,7 @@ import {CustomBulletList, CustomBlockquote, CustomOrderedList, CustomTaskList, C
 import classes from "./MarkdownEditor.module.css";
 import Toolbar from "./Toolbar";
 import {Link} from "@tiptap/extension-link";
+import {RiSettings3Line} from "react-icons/ri";
 
 type MarkDownEditorProps = {
     content:string|{},isVisible?:boolean,isLeftLog?:boolean
@@ -60,8 +61,16 @@ const MarkdownEditor: React.FC<MarkDownEditorProps> = ({content,isVisible=true,i
 
                 {editor && <Toolbar editor={editor}/>}
 
-                <div className={classes.editorName}>
-                    <button onClick={saveEditor}>儲存</button>
+
+
+                <div className={classes.editorSetting}>
+                    <div className={classes.icon}>
+                        <RiSettings3Line/>
+                    </div>
+                    {/*<button onClick={saveEditor}>儲存</button>*/}
+                    {/*<div className={classes.icon}>*/}
+                    {/*    <RiSettings3Line/>*/}
+                    {/*</div>*/}
                 </div>
             </div>
             </div>

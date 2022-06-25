@@ -3,7 +3,7 @@ import Link from "next/link";
 import classes from "./MainNavigation.module.css";
 import Logo from "./Logo";
 import Icon from "../ui/Icon";
-import {RiUserLine,RiDraftLine} from "react-icons/ri";
+import {RiUserLine,RiDraftLine,RiMenuFill} from "react-icons/ri";
 
 const MainNavigation:FC=()=>{
     return <header className={classes.header}>
@@ -13,18 +13,33 @@ const MainNavigation:FC=()=>{
             </a>
         </Link>
 
-        <nav className={classes.end}>
-            <ul>
-                <li><Link href="/works"><a className='button'><RiUserLine/></a></Link></li>
-                <li><Link href="/"><a className='button'>
-                    {/*<Icon type='pencilAlt'/>*/}
-                    <RiDraftLine/>
-                </a></Link></li>
-                <li><Link href="/directions"><a className='button'>
-                    <Icon type='searchCircle'/>
-                </a></Link></li>
+        <nav className={classes.nav}>
+            <ul className={classes.navNormal}>
+                <li>
+                    <Link href="/auth"><a>
+                        <RiUserLine/>
+                    </a></Link>
+                </li>
+                <li>
+                    <Link href="/notes"><a>
+                        <RiDraftLine/>
+                    </a></Link></li>
+                <li>
+                    <Link href="/directions"><a>
+                        <Icon type='searchCircle'/>
+                    </a></Link>
+                </li>
+            </ul>
+            <ul className={classes.navSmall}>
+                <li>
+                    <a>
+                        <RiMenuFill/>
+                    </a>
+                </li>
             </ul>
         </nav>
+
+
 
     </header>
 };

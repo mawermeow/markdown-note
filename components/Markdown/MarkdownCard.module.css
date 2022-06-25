@@ -1,9 +1,9 @@
 .range{
-    width: 80%;
+    width: 78.6%;
     margin: 30px auto;
 }
 
-.range button{
+.range > button {
     color:#000000;
     background: inherit;
     font-weight: 700;
@@ -16,27 +16,25 @@
     text-transform: uppercase;
 }
 
-.range .isActive{
-    color:#FFF;
-    font-weight: 700;
-    font-size: .75rem;
-    line-height: 1rem;
-    padding: 0.5rem 1rem;
-    background: #000000;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    border: 0;
-    text-transform: uppercase;
+@keyframes animationFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    0% { transform: translateY(0px); }
+}
+.range .notActive:hover{
+    animation-name: animationFloat;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+    animation-play-state: running;
 }
 
-.editor {
-    background-color: #fff;
-    border: 3px solid #0d0d0d;
-    border-radius: 0.75rem;
-    color: #0d0d0d;
-    display: flex;
-    flex-direction: column;
-    /*max-height: 26rem;*/
+.range .isActive{
+    color:#FFF;
+    background: #000000;
 }
 
 .editor.isLeftLog{

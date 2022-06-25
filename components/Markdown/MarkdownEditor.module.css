@@ -74,7 +74,7 @@
 
 
 
-.editorName button {
+.editorSetting button {
     background: none;
     border: none;
     border-radius: 0.4rem;
@@ -84,7 +84,23 @@
     font-weight: 600;
     padding: 0.25rem 0.5rem;
 }
-.editorName button:hover {
+.editorSetting button:hover {
      background-color: #0d0d0d;
      color: #fff;
  }
+
+.icon {
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333333;
+}
+
+.icon:hover {
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+}

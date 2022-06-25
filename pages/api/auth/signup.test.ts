@@ -4,7 +4,7 @@ import signup from "./signup";
 import {connectToDatabase} from '../../../lib/database';
 import {hashPassword} from "../../../lib/auth";
 
-const validMail = 'meow@ahri.cc';
+const validUsername = 'mawer';
 const validPassword = '12345678';
 
 vi.mock("../../../lib/auth");
@@ -16,10 +16,10 @@ vi.mock('../../../lib/database', () => {
         connectToDatabase: vi.fn(() => ({
             db: vi.fn(() => ({
                 collection: vi.fn((collection: string) => ({
-                    findOne: vi.fn((searchObj: {email:string})=>{
-                        const existingMail = 'irelia@ahri.cc';
-                        if(searchObj.email === existingMail){
-                            return existingMail;
+                    findOne: vi.fn((searchObj: {username:string})=>{
+                        const existingUsername = 'sett';
+                        if(searchObj.username === existingUsername){
+                            return existingUsername;
                         }
                     }),
                     insertOne: vi.fn(()=>{
@@ -56,7 +56,7 @@ describe('signup()', () => {
         const {req, res} = createMocks({
             method: 'POST',
             body: {
-                email: validMail,
+                username: validUsername,
                 password: invalidPassword
             },
         });
@@ -66,17 +66,17 @@ describe('signup()', () => {
         expect(res._getStatusCode()).toBe(422);
         expect(JSON.parse(res._getData())).toEqual(
             expect.objectContaining({
-                message: '輸入錯誤，密碼長度請大於七位數',
+                message:'Input error, the length of the username should be longer than four characters, and the length of the password should be longer than seven characters',
             }),
         );
     })
 
-    it('should call the function which connect to the database , if the input mailbox and password are in the correct format', async () => {
+    it('should call the function which connect to the database , if the input username and password are in the correct format', async () => {
 
         const {req, res} = createMocks({
             method: 'POST',
             body: {
-                email: validMail,
+                username: validUsername,
                 password: validPassword
             },
         });
@@ -87,12 +87,12 @@ describe('signup()', () => {
     });
     it('should display an error message if the entered mailbox already exists',async()=>{
 
-        const existingMail = 'irelia@ahri.cc';
+        const existingUsername = 'sett';
 
         const {req, res} = createMocks({
             method: 'POST',
             body: {
-                email: existingMail,
+                username: existingUsername,
                 password: validPassword
             },
         });
@@ -102,7 +102,7 @@ describe('signup()', () => {
         expect(res._getStatusCode()).toBe(422);
         expect(JSON.parse(res._getData())).toEqual(
             expect.objectContaining({
-                message: '這個信箱註冊過囉'
+                message: 'username already exists'
             }),
         );
     });
@@ -112,7 +112,7 @@ describe('signup()', () => {
         const {req, res} = createMocks({
             method: 'POST',
             body: {
-                email: validMail,
+                username: validUsername,
                 password: validPassword
             },
         });
@@ -126,7 +126,7 @@ describe('signup()', () => {
         const {req, res} = createMocks({
             method: 'POST',
             body: {
-                email: validMail,
+                username: validUsername,
                 password: validPassword
             },
         });
@@ -140,7 +140,7 @@ describe('signup()', () => {
         const {req, res} = createMocks({
             method: 'POST',
             body: {
-                email: validMail,
+                username: validUsername,
                 password: validPassword
             },
         });
@@ -150,7 +150,7 @@ describe('signup()', () => {
         expect(res._getStatusCode()).toBe(201);
         expect(JSON.parse(res._getData())).toEqual(
             expect.objectContaining({
-                message: '帳號註冊完成！'
+                message: 'account registration completed'
             }),
         );
     });

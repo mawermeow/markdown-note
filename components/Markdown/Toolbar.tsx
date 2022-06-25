@@ -7,25 +7,18 @@ import {
     RiItalic,
     RiStrikethrough,
     RiCodeSSlashLine,
-    RiEmotionLine,
-    RiH1,
-    RiH2,
-    RiH3,
-    RiH4,
-    RiH5,
-    RiH6,
-    RiParagraph,
-    RiListOrdered,
-    RiListUnordered,
     RiCodeBoxLine,
     RiLink,
-    RiLinkUnlink,
     RiDoubleQuotesL,
     RiSeparator,
-    RiTextWrap,
     RiFormatClear,
     RiArrowGoBackLine,
     RiArrowGoForwardLine, RiCheckboxLine,
+    RiListOrdered,
+    RiListUnordered,
+    RiSettings3Line,
+    RiSave3Line
+
 } from 'react-icons/ri'
 
 type ToolbarProps = {editor:Editor}
@@ -101,12 +94,15 @@ const Toolbar:FC<ToolbarProps> = ({editor}) =>{
 
         <div className={classes.divider}/>
 
-        <div className={classes.icon} onClick={() => editor.chain().focus().undo().run()}>
-            <RiArrowGoBackLine />
+        <div className={classes.icon} onClick={() => console.log(editor.getJSON())}>
+            <RiSave3Line />
         </div>
-        <div className={classes.icon} onClick={() => editor.chain().focus().redo().run()}>
-            <RiArrowGoForwardLine />
-        </div>
+        {/*<div className={classes.icon} onClick={() => editor.chain().focus().undo().run()}>*/}
+        {/*    <RiArrowGoBackLine />*/}
+        {/*</div>*/}
+        {/*<div className={classes.icon} onClick={() => editor.chain().focus().redo().run()}>*/}
+        {/*    <RiArrowGoForwardLine />*/}
+        {/*</div>*/}
     </div>
     </>
 };

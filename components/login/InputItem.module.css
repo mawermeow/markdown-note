@@ -12,13 +12,13 @@
     border-bottom: 1px solid #9e9e9e;
     transition: border-bottom, box-shadow .25s ease-in-out;
     font-size: 20px;
-    padding: 20px 15px 20px 5px;
+    padding: 20px 15px 10px 5px;
     text-align: center;
 }
-.inputItem label{
+.inputItem > label{
     position: absolute;
     top: 0;
-    left: 20px;
+    left: calc(50% - 48px);
     cursor: text;
     color: #686868;
     transform: translateY(13px);
@@ -51,4 +51,13 @@
     width: 1.5rem;
     height: 1.5rem;
     vertical-align: bottom;
+}
+
+@media (max-width: 250px) {
+    .inputItem > label {
+        left: calc(50% - 12px);
+    }
+    .inputItem > label > span{
+        display: none;
+    }
 }

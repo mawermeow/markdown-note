@@ -11,7 +11,6 @@ const MarkdownCard:FC<MarkdownCardProps> = ({contents}) => {
     const [tag, setTag] = useState('Daily');
 
     const CardButton:FC<CardButtonProps> = ({value,isFirst})=>{
-
         const clickHandler=()=>{
             if(isFirst){
                 setIsLeftLog(true);
@@ -20,9 +19,8 @@ const MarkdownCard:FC<MarkdownCardProps> = ({contents}) => {
             }
             setTag(value);
         };
-
         return <button
-            className={`${tag===value?classes.isActive:''}`}
+            className={`${tag===value?classes.isActive:classes.notActive}`}
             onClick={clickHandler}>
             {value}
         </button>
@@ -46,11 +44,9 @@ const MarkdownCard:FC<MarkdownCardProps> = ({contents}) => {
         />
     });
 
-
-
     return <div className={classes.range}>
         {cardButtonList}
-        <button>+</button>
+        <button className={classes.notActive}>+</button>
         {editorList}
         {/*<CardButton value='Daily' isFirst={true}/>*/}
         {/*<CardButton value='Monthly' />*/}

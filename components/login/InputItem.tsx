@@ -1,6 +1,7 @@
 import {FC, ChangeEvent } from 'react';
 import classes from "./InputItem.module.css";
 import Icon from "../ui/Icon";
+import {RiLock2Line,RiUserLine} from "react-icons/ri";
 
 type InputItemProps = {
     type:string,
@@ -15,11 +16,11 @@ const InputItem:FC<InputItemProps>=(props)=>{
     let icon;
 
     if(placeholder==='Password'){
-        icon = <Icon type='key'/>;
+        icon = <RiLock2Line/>;
     }
 
-    if(placeholder==='Email'){
-        icon = <Icon type='mail'/>;
+    if(placeholder==='Username'){
+        icon = <RiUserLine/>;
     }
 
     const changeInputHandler=(event: ChangeEvent<HTMLInputElement>):void=>{
@@ -29,7 +30,10 @@ const InputItem:FC<InputItemProps>=(props)=>{
     return <div className={classes.inputItem}>
                 <input type={type} id={id} placeholder={placeholder}
                        onChange={changeInputHandler}/>
-                <label htmlFor={id}>{icon&&icon} {placeholder}</label>
+                <label htmlFor={id}>
+                    {icon&&icon}
+                    <span>{placeholder}</span>
+                </label>
             </div>
 };
 

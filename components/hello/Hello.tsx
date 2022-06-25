@@ -1,14 +1,19 @@
 import {FC} from 'react';
 import classes from "./Hello.module.css";
+import Image from "next/image";
 
 const Hello: FC = () => {
+
     return <>
         <div className={classes.container}>
             <div className={classes.header}>
-                <img src="https://burst.shopifycdn.com/photos/two-customized-cars-rolling-through-a-city-street.jpg"
+                <img src="./images/basic/header.jpeg"
+                       alt='header'
+                       width={1100}
+                       height={660}
                       className={classes.background}/>
                 <div className={classes.floatAnimation}>
-                    <h1>CSS Parallax</h1>
+                    <h1>Moni Note</h1>
                 </div>
             </div>
             <section>
@@ -31,6 +36,7 @@ const Hello: FC = () => {
                     expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe
                     dolor inventore itaque. Quae.</p>
             </section>
+
         </div>
     </>
 };

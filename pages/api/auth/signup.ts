@@ -12,18 +12,16 @@ const handler = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
         return;
     }
 
-    const data = req.body;
-
-    const { email, password } = data;
+    const { username, password } = req.body;
 
     if (
-        !email ||
-        !email.includes('@') ||
+        !username ||
+        username.trim().length < 4 ||
         !password ||
         password.trim().length < 7
     ) {
         res.status(422).json({
-            message:'輸入錯誤，密碼長度請大於七位數',
+            message:'Input error, the length of the username should be longer than four characters, and the length of the password should be longer than seven characters',
         });
         return;
     }
@@ -32,10 +30,10 @@ const handler = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
 
     const db = client.db();
 
-    const existingUser = await db.collection('users').findOne({ email: email });
+    const existingUser = await db.collection('users').findOne({ username: username });
 
     if (existingUser) {
-        res.status(422).json({ message: '這個信箱註冊過囉' });
+        res.status(422).json({ message: 'username already exists' });
         await client.close();
         return;
     }
@@ -43,12 +41,12 @@ const handler = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
     const hashedPassword = await hashPassword(password);
 
     const result = await db.collection('users').insertOne({
-        email: email,
+        username: username,
         password: hashedPassword,
         journal:[]
     });
 
-    res.status(201).json({ message: '帳號註冊完成！' });
+    res.status(201).json({ message: 'account registration completed' });
     await client.close();
 }
 
