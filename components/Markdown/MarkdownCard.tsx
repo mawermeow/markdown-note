@@ -1,30 +1,64 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import classes from "./MarkdownCard.module.css";
 import MarkdownEditor from "./MarkdownEditor";
 
-const MarkdownCard:FC = () =>{
+type LogProps = {title:string, content:string|{}};
+type MarkdownCardProps = {contents: LogProps[]};
+type CardButtonProps = {value:string,isFirst?:boolean};
 
-    const DUMMY_CONTENT = `
-    <p>
-      Markdown shortcuts make it easy to format the text while typing.
-    </p>
-    <p>
-      To test that, start a new line and type <code>#</code> followed by a space to get a heading. Try <code>#</code>, <code>##</code>, <code>###</code>, <code>####</code>, <code>#####</code>, <code>######</code> for different levels.
-    </p>
-    <p>
-      Those conventions are called input rules in tiptap. Some of them are enabled by default. Try <code>></code> for blockquotes, <code>*</code>, <code>-</code> or <code>+</code> for bullet lists, or <code>\`foobar\`</code> to highlight code, <code>~~tildes~~</code> to strike text, or <code>==equal signs==</code> to highlight text.
-    </p>
-    <p>
-      You can overwrite existing input rules or add your own to nodes, marks and extensions.
-    </p>
-    <p>
-      For example, we added the <code>Typography</code> extension here. Try typing <code>(c)</code> to see how it’s converted to a proper © character. You can also try <code>-></code>, <code>>></code>, <code>1/2</code>, <code>!=</code>, or <code>--</code>.
-    </p>
-    `
+const MarkdownCard:FC<MarkdownCardProps> = ({contents}) => {
+    const [isLeftLog, setIsLeftLog] = useState(true);
+    const [tag, setTag] = useState('Daily');
+
+    const CardButton:FC<CardButtonProps> = ({value,isFirst})=>{
+
+        const clickHandler=()=>{
+            if(isFirst){
+                setIsLeftLog(true);
+            }else{
+                setIsLeftLog(false);
+            }
+            setTag(value);
+        };
+
+        return <button
+            className={`${tag===value?classes.isActive:''}`}
+            onClick={clickHandler}>
+            {value}
+        </button>
+    }
+
+    let firstLog = true;
+    const cardButtonList = contents.map(content=>{
+        if(firstLog){
+            firstLog = false;
+            return <CardButton value={content.title} isFirst={true} key={content.title}/>
+        }
+        return <CardButton value={content.title} key={content.title} />
+    });
+
+    const editorList = contents.map(content=>{
+        return <MarkdownEditor
+            content={content.content}
+            isVisible={tag===content.title? undefined : false}
+            isLeftLog={isLeftLog}
+            key={content.title}
+        />
+    });
+
+
 
     return <div className={classes.range}>
-        <MarkdownEditor content={DUMMY_CONTENT}/>
+        {cardButtonList}
+        <button>+</button>
+        {editorList}
+        {/*<CardButton value='Daily' isFirst={true}/>*/}
+        {/*<CardButton value='Monthly' />*/}
+        {/*<CardButton value='Future' />*/}
+        {/*<MarkdownEditor content={dailyLog} isVisible={tag==='Daily'? undefined : false} isLeftLog={isLeftLog}/>*/}
+        {/*<MarkdownEditor content={monthlyLog} isVisible={tag==='Monthly'? undefined : false} isLeftLog={isLeftLog}/>*/}
+        {/*<MarkdownEditor content={futureLog} isVisible={tag==='Future'? undefined : false} isLeftLog={isLeftLog}/>*/}
     </div>
-};
+}
 
 export default MarkdownCard;

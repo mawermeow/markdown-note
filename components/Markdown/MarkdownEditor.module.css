@@ -1,3 +1,7 @@
+.isNotVisible{
+    display: none;
+}
+
 .editor {
     background-color: #fff;
     border: 3px solid #0d0d0d;
@@ -7,6 +11,11 @@
     flex-direction: column;
     /*max-height: 26rem;*/
 }
+
+.isLeftLog{
+    border-top-left-radius: 0;
+}
+
 .editorHeader {
      align-items: center;
      border-bottom: 3px solid #0d0d0d;

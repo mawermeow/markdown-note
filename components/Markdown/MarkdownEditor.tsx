@@ -11,12 +11,14 @@ import { Color } from '@tiptap/extension-color'
 import TextStyle from '@tiptap/extension-text-style'
 import {CustomBulletList, CustomBlockquote, CustomOrderedList, CustomTaskList, CustomCode,CustomCodeBlock} from "./ShortCut";
 import classes from "./MarkdownEditor.module.css";
+import Toolbar from "./Toolbar";
+import {Link} from "@tiptap/extension-link";
 
 type MarkDownEditorProps = {
-    content:string
+    content:string|{},isVisible?:boolean,isLeftLog?:boolean
 }
 
-const MarkdownEditor: React.FC<MarkDownEditorProps> = ({content}) => {
+const MarkdownEditor: React.FC<MarkDownEditorProps> = ({content,isVisible=true,isLeftLog}) => {
 
     const editor = useEditor({
         extensions: [
@@ -29,30 +31,39 @@ const MarkdownEditor: React.FC<MarkDownEditorProps> = ({content}) => {
             }),
             Color,
             TextStyle,
+            Link,
             CustomBulletList, CustomBlockquote, CustomOrderedList, CustomTaskList,CustomCode,CustomCodeBlock
         ],
         content: content,
+        onUpdate: ({ editor }) => {
+            const json = editor.getJSON()
+            // send the content to an API here
+        },
     })
 
     const saveEditor=()=>{
         const text = editor?.getJSON();
-        console.log('儲存檔案到localhost',text);
+        console.log(text);
     };
 
     let status = 'Connected';
     const statusCss = status==='Connecting' ? classes.editorStatusConnecting : classes.editorStatusConnected;
 
     return (
-        <div className={classes.editor}>
+        <div className={isVisible?'':classes.isNotVisible}>
+            <div className={`${classes.editor} ${isLeftLog ? classes.isLeftLog : ''}`}>
             {editor && <BubbleList editor={editor}/>}
             {editor && <FloatingList editor={editor}/>}
             <EditorContent className={classes.editorContent} editor={editor}/>
             <div className={classes.editorFooter}>
-                <div className={`${classes.editorStatus} ${statusCss}`}>
-                </div>
+                <div className={`${classes.editorStatus} ${statusCss}`}/>
+
+                {editor && <Toolbar editor={editor}/>}
+
                 <div className={classes.editorName}>
                     <button onClick={saveEditor}>儲存</button>
                 </div>
+            </div>
             </div>
         </div>
     )

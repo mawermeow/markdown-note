@@ -2,3 +2,43 @@
     width: 80%;
     margin: 30px auto;
 }
+
+.range button{
+    color:#000000;
+    background: inherit;
+    font-weight: 700;
+    font-size: .75rem;
+    line-height: 1rem;
+    padding: 0.5rem 1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border: 0;
+    text-transform: uppercase;
+}
+
+.range .isActive{
+    color:#FFF;
+    font-weight: 700;
+    font-size: .75rem;
+    line-height: 1rem;
+    padding: 0.5rem 1rem;
+    background: #000000;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border: 0;
+    text-transform: uppercase;
+}
+
+.editor {
+    background-color: #fff;
+    border: 3px solid #0d0d0d;
+    border-radius: 0.75rem;
+    color: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    /*max-height: 26rem;*/
+}
+
+.editor.isLeftLog{
+    border-top-left-radius: 0;
+}

@@ -1,6 +1,8 @@
-import {FC, FormEvent} from 'react';
+import {FC, FormEvent, useState} from 'react';
 import {BubbleMenu} from "@tiptap/react";
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
+import classes from "./BubbleList.module.css";
+import {RiPencilLine} from "react-icons/ri";
 
 
 type BubbleListProps = {editor:Editor};
@@ -8,6 +10,7 @@ type ColorButtonProps = {buttonText:string,newColor:string,originColor:string};
 type SelectButtonProps = {buttonText:string,onClick:(selectedText:string)=>void};
 
 const BubbleList:FC<BubbleListProps> = ({editor}) =>{
+    const [color,setColor] = useState('#000000');
 
     const ColorButton:FC<ColorButtonProps> = ({buttonText, newColor, originColor})=>{
         return <button
@@ -40,7 +43,31 @@ const BubbleList:FC<BubbleListProps> = ({editor}) =>{
     if(!editor){return <span>Loading...</span>}
 
     return <>
-        <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor} pluginKey="BubbleOne">
+        <BubbleMenu className={classes.bubbleMenu} tippyOptions={{ duration: 100 }} editor={editor} pluginKey="BubbleOne">
+            <div className={classes.color}>
+                <input
+                    type="color"
+                    onInput={event => {
+                        const element = event.currentTarget as HTMLInputElement;
+                        const value = element.value;
+                        setColor(value);
+                        return editor.chain().focus().setColor(value).run();
+                    }}
+                    value={color}
+                />
+            </div>
+            <div
+                className={`${classes.icon} ${editor.isActive('textStyle', {color: color}) ? classes.isActive : ''}`}
+                onClick={() => {
+                    if(editor.isActive('textStyle', { color: color})){
+                        editor.chain().focus().setColor('#000000').run()
+                    }else{
+                        editor.chain().focus().setColor(color).run()
+                    }
+                }}
+            >
+                <RiPencilLine/>
+            </div>
             <ColorButton
                 buttonText='紅'
                 newColor='#F98181'
@@ -53,7 +80,7 @@ const BubbleList:FC<BubbleListProps> = ({editor}) =>{
             />
             <button
                 onClick={transferNotes}
-                className={editor.isActive('strike') ? 'is-active' : ''}
+                className={editor.isActive('strike') ? classes.isActive : ''}
             >
                 轉移
             </button>

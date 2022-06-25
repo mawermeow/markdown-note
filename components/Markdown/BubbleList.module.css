@@ -1,0 +1,61 @@
+.bubbleMenu {
+    display: flex;
+    background-color: #0D0D0D;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+}
+.bubbleMenu button {
+    border: none;
+    background: none;
+    color: #FFF;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 0.2rem;
+    opacity: 0.6;
+}
+.bubbleMenu button:hover,
+.bubbleMenu button.isActive {
+    opacity: 1;
+}
+
+
+.icon {
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    opacity: 0.6;
+}
+
+.icon:hover,
+.icon.isActive{
+    color: #ffffff;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.color {
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    background: inherit;
+}
+
+.color input{
+    border: 0;
+    background: inherit;
+    border-radius: 7px;
+    margin: 0;
+}
+
+/*.icon input:hover{*/
+/*    background: inherit;*/
+
+/*}*/
