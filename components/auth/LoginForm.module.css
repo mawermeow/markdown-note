@@ -1,0 +1,22 @@
+.loginFormInputItem{
+    width: 61.8%;
+    display: inline-block;
+    margin: auto;
+}
+
+.icon {
+    border-radius: 5px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background: inherit;
+    font-size: 15px;
+}
+
+.icon:hover {
+    background: var(--color-sidebar-background-color);
+    color: var(--color-sidebar-cell-text-color);
+    cursor: pointer;
+}

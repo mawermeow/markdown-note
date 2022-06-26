@@ -1,5 +1,9 @@
-import type { NextPage } from 'next';
+import type {GetStaticProps, NextPage} from 'next';
 import MarkdownCard from "../components/Markdown/MarkdownCard";
+import {getSession, GetSessionOptions} from "next-auth/client";
+import { ParsedUrlQuery } from "querystring";
+import {IncomingMessage} from "http";
+import {CustomGetServerSideProps} from "../types/CustomServerSideProps";
 
 const DUMMY_CONTENT = [{title:'Daily',content:{
         "type": "doc",
@@ -53,10 +57,27 @@ const DUMMY_CONTENT = [{title:'Daily',content:{
     </p>
     `}]
 
-const NotesPage: NextPage = () => {
+const NotesPage: NextPage = (props) => {
     return <>
         <MarkdownCard contents={DUMMY_CONTENT}/>
     </>
 }
-
 export default NotesPage;
+
+
+export const getServerSideProps:CustomGetServerSideProps = async (context)=> {
+
+    const session = await getSession({req:context.req});
+
+    if(!session) {
+        return{
+            redirect:{
+                destination:'/auth', // 描述重新定向的位置
+                permanent:false // 它是永久的還是只有一次
+            }
+        }
+    }
+    return{
+        props:{session}
+    }
+}

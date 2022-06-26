@@ -14,6 +14,7 @@ import classes from "./MarkdownEditor.module.css";
 import Toolbar from "./Toolbar";
 import {Link} from "@tiptap/extension-link";
 import {RiSettings3Line} from "react-icons/ri";
+import ActionBorder from "../ui/card/ActionBorder";
 
 type MarkDownEditorProps = {
     content:string|{},isVisible?:boolean,isLeftLog?:boolean
@@ -51,30 +52,14 @@ const MarkdownEditor: React.FC<MarkDownEditorProps> = ({content,isVisible=true,i
     const statusCss = status==='Connecting' ? classes.editorStatusConnecting : classes.editorStatusConnected;
 
     return (
-        <div className={isVisible?'':classes.isNotVisible}>
-            <div className={`${classes.editor} ${isLeftLog ? classes.isLeftLog : ''}`}>
+        <>
             {editor && <BubbleList editor={editor}/>}
             {editor && <FloatingList editor={editor}/>}
             <EditorContent className={classes.editorContent} editor={editor}/>
-            <div className={classes.editorFooter}>
-                <div className={`${classes.editorStatus} ${statusCss}`}/>
-
+            <ActionBorder>
                 {editor && <Toolbar editor={editor}/>}
-
-
-
-                <div className={classes.editorSetting}>
-                    <div className={classes.icon}>
-                        <RiSettings3Line/>
-                    </div>
-                    {/*<button onClick={saveEditor}>儲存</button>*/}
-                    {/*<div className={classes.icon}>*/}
-                    {/*    <RiSettings3Line/>*/}
-                    {/*</div>*/}
-                </div>
-            </div>
-            </div>
-        </div>
+            </ActionBorder>
+        </>
     )
 }
 

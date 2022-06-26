@@ -1,0 +1,25 @@
+.mainBorder{
+    background-color: var(--color-sidebar-cell-text-color);
+    border: 3px solid var(--color-sidebar-background-color);
+    border-radius: 0.75rem;
+    color: var(--color-sidebar-background-color);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 12px 0 0 0;
+    width: 100%;
+    text-align: center;
+}
+
+.mainBorder.isEditor{
+    text-align: initial;
+    padding: 0;
+}
+
+.mainBorder.isLeft{
+    border-top-left-radius: 0;
+}
+
+.isNotVisible{
+    display: none;
+}

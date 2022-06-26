@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import MarkdownEditor from "../components/Markdown/MarkdownEditor";
-import {describe} from "vitest";
+import MainBorder from "../components/ui/card/MainBorder";
+
 
 const DirectionsPage: NextPage = () => {
     const directions = {
@@ -327,9 +328,9 @@ const DirectionsPage: NextPage = () => {
     ]
 }
 
-    return <>
+    return <MainBorder isLeft={false} isVisible={true}>
         <MarkdownEditor content={directions}/>
-    </>
+    </MainBorder>
 }
 
 export default DirectionsPage;

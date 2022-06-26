@@ -4,8 +4,12 @@ import classes from "./MainNavigation.module.css";
 import Logo from "./Logo";
 import Icon from "../ui/Icon";
 import {RiUserLine,RiDraftLine,RiMenuFill} from "react-icons/ri";
+import {useSession} from "next-auth/client";
 
 const MainNavigation:FC=()=>{
+    const [session, loading] = useSession();
+
+
     return <header className={classes.header}>
         <Link href="/">
             <a>
@@ -20,10 +24,10 @@ const MainNavigation:FC=()=>{
                         <RiUserLine/>
                     </a></Link>
                 </li>
-                <li>
+                {session && <li>
                     <Link href="/notes"><a>
                         <RiDraftLine/>
-                    </a></Link></li>
+                    </a></Link></li>}
                 <li>
                     <Link href="/directions"><a>
                         <Icon type='searchCircle'/>

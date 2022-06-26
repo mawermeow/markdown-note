@@ -21,7 +21,7 @@ export default NextAuth({
                 const usersCollection = client.db().collection('users');
 
                 const user = await usersCollection.findOne({
-                    email: credentials.username,
+                    username: credentials.username,
                 });
 
                 if (!user) {
@@ -40,7 +40,7 @@ export default NextAuth({
                 }
 
                 await client.close();
-                return { username: user.username };
+                return { name: user.username };
 
             },
         }),

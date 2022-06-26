@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./Toolbar.module.css";
 import {setLink} from "../../lib/setLink";
@@ -96,6 +96,9 @@ const Toolbar:FC<ToolbarProps> = ({editor}) =>{
 
         <div className={classes.icon} onClick={() => console.log(editor.getJSON())}>
             <RiSave3Line />
+        </div>
+        <div className={classes.icon}>
+            <RiSettings3Line/>
         </div>
         {/*<div className={classes.icon} onClick={() => editor.chain().focus().undo().run()}>*/}
         {/*    <RiArrowGoBackLine />*/}

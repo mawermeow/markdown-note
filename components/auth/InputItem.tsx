@@ -1,17 +1,17 @@
 import {FC, ChangeEvent } from 'react';
 import classes from "./InputItem.module.css";
-import Icon from "../ui/Icon";
 import {RiLock2Line,RiUserLine} from "react-icons/ri";
 
 type InputItemProps = {
     type:string,
     id:string,
     placeholder:string,
+    value:string,
     onChange:(input:string)=>void
 };
 
 const InputItem:FC<InputItemProps>=(props)=>{
-    const {type, id, placeholder, onChange} = props;
+    const {type, id, placeholder, value, onChange} = props;
 
     let icon;
 
@@ -29,6 +29,7 @@ const InputItem:FC<InputItemProps>=(props)=>{
 
     return <div className={classes.inputItem}>
                 <input type={type} id={id} placeholder={placeholder}
+                       value={value}
                        onChange={changeInputHandler}/>
                 <label htmlFor={id}>
                     {icon&&icon}
