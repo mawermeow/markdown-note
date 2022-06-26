@@ -1,9 +1,7 @@
 .container {
     height: 100vh;
-    /*height: 40rem;*/
     overflow-y: auto;
     overflow-x: hidden;
-    /*perspective: 10px;*/
     perspective: 1rem;
     margin: auto;
 }
@@ -19,7 +17,7 @@
 
 .header h1 {
     font-size: 8rem;
-    color: #FFFFFF;
+    color: var(--color-hashtag-text-color);
     text-align: center;
 }
 
@@ -33,8 +31,8 @@
 .container section {
     font-size: 1.8rem;
     padding: 25px;
-    background: var(--color-main-200);
-    color: #84625c;
+    background: var(--color-background-text-color);
+    color: var(--color-base-text-color);
 }
 
 
@@ -54,20 +52,6 @@
     animation-play-state: running;
 }
 
-
-@media (min-width:768px) and (max-width: 1595px) {
-    .header h1 {
-        font-size: 6rem;
-    }
-
-    .header {
-        height: 75%;
-    }
-
-    .background{
-        transform: translateZ(-4px) scale(2.2);
-    }
-}
 
 @media (min-width:600px) and (max-width: 768px) {
     .header h1 {

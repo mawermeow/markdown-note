@@ -6,6 +6,57 @@
 }
 
 body {
+  --color-base-background-color: #fdfdfd;
+  --color-dark-background-color: #11284a;
+  --color-title-text-color: #4268a0;
+  --color-text-color: #585f68;
+  --color-icon-color: #b6b6b6;
+  --color-label-color: #676f7e;
+  --color-separator-color: #dcdfe3;
+  --color-accent-color: #d37e7e;
+  --color-white-color: #ffffff;
+
+  --color-background-text-color: #fdfdfd;
+  --color-base-text-color: #44526b;
+  --color-light-text-color: #777f8a;
+  --color-link-text-color: #9e4140;
+  --color-accent-text-color: #d37e7e;
+  --color-insertion-point-color: #44526b;
+  --color-selected-text-background-color: #44526b;
+  --color-selected-text-inactive-background-color: #f7fbff;
+  --color-style-marker-text-color: #255398;
+  --color-invalid-character-color: #9e4140;
+  --color-map-text-color: #0b8717;
+  --color-separator-text-color: #9db0ce;
+  --color-hashtag-text-color: #ffffff;
+  --color-hashtag-marker-text-color: #ffffff;
+  --color-hashtag-background-color: #b1bdcd;
+  --color-hashtag-selected-background-color: #9ba5b4;
+  --color-checkbox-fill-color: #fefffe;
+  --color-checkbox-stroke-color: #667d9e;
+  --color-checkbox-check-color: #667d9e;
+  --color-highlighter-background-color: #d3ffa4;
+  --color-highlighter-marker-color: #91d44c;
+  --color-code-background-color: #fcfcfc;
+  --color-code-stroke-color: #667d9e;
+  --color-code-font-color: #44526b;
+  --color-syntax-keyword: #0f60da;
+  --color-syntax-comment: #737577;
+  --color-syntax-string: #ad435b;
+  --color-syntax-project: #0b3587;
+  --color-syntax-preprocessor: #782b87;
+  --color-syntax-documentation-comment: #2f7e35;
+  --color-syntax-number: #762727;
+  --color-syntax-character: #7390c9;
+  --color-syntax-attribute: #782b87;
+
+  --color-sidebar-background-color: #24435a;
+  --color-sidebar-cell-selected-background-color: #3b6b90;
+  --color-sidebar-cell-selected-background-inactive-color: #2e5573;
+  --color-sidebar-cell-text-color: #ffffff;
+  --color-sidebar-cell-icon-color: #a0d7e3;
+  --color-sidebar-cell-icon-light-color: #a0d7e3;
+
   --color-main-50: hsl(0, 60%, 96%);
   --color-main-100: hsl(2, 61%, 92%);
   --color-main-200: hsl(2, 61%, 88%);
@@ -51,8 +102,8 @@ body {
   --size-main-a2: 12.3rem;
 
   margin: 0;
-  background-color: var(--color-main-200);
-  color: #684943;
+  background-color: var(--color-background-text-color);
+  color: var(--color-base-text-color);
   font-family: 'Roboto', sans-serif;
 }
 
@@ -98,11 +149,15 @@ button {
 }
 
 .ProseMirror{
-  background: #FFFFFF;
+  background: var(--color-base-background-color);
   border-radius: 8px;
   padding: 5px 15px;
-  color: black;
+  color: var(--color-text-color);
   font-size: 20px;
+}
+.ProseMirror strike,
+.ProseMirror s{
+  color: var(--color-icon-color);
 }
 
 .ProseMirror> * + * {
@@ -112,6 +167,7 @@ button {
 .ProseMirror p {
   margin-top: 10px;
   margin-bottom: 10px;
+  line-height: 26px;
 }
 
 .ProseMirror ul,
@@ -124,6 +180,11 @@ button {
 .ProseMirror ol li,
 .ProseMirror ul li{
   padding-left: 2px;
+}
+
+.ProseMirror ol li::marker,
+.ProseMirror ul li::marker{
+  color: var(--color-accent-color);
 }
 
 .ProseMirror ul[data-type='taskList'] {
@@ -158,6 +219,8 @@ button {
   cursor: pointer;
 }
 
+
+
 .ProseMirror h1,
 .ProseMirror h2,
 .ProseMirror h3,
@@ -165,11 +228,13 @@ button {
 .ProseMirror h5,
 .ProseMirror h6 {
   line-height: 1.1;
+  color: var(--color-title-text-color);
 }
 
 .ProseMirror code {
-  background-color: rgba(97,97,97, 0.1);
+  /*background-color: rgba(97,97,97, 0.1);*/
   color: #616161;
+  border: 1px solid var(--color-separator-color);
 }
 
 .ProseMirror pre {
@@ -200,7 +265,7 @@ button {
 }
 
 .ProseMirror blockquote {
-  border-left: 2px solid rgba(13,13,13, 0.4);
+  border-left: 2px solid var(--color-accent-color);
   padding: 0 10px;
   margin: 10px 0 10px 9.5px;
 }

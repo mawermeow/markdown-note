@@ -1,17 +1,18 @@
 .bubbleMenu {
     display: flex;
-    background-color: #0D0D0D;
+    background-color: var(--color-base-background-color);
     padding: 0.2rem;
     border-radius: 0.5rem;
+    border: 1px solid var(--color-sidebar-cell-selected-background-color);
 }
 .bubbleMenu button {
     border: none;
     background: none;
-    color: #FFF;
+    color: var(--color-sidebar-background-color);
     font-size: 0.85rem;
     font-weight: 500;
     padding: 0 0.2rem;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 .bubbleMenu button:hover,
 .bubbleMenu button.isActive {
@@ -26,13 +27,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #FFF;
+    color: var(--color-sidebar-background-color);
     opacity: 0.6;
 }
 
 .icon:hover,
 .icon.isActive{
-    color: #ffffff;
+    /*color: #ffffff;*/
     cursor: pointer;
     opacity: 1;
 }
@@ -54,8 +55,3 @@
     border-radius: 7px;
     margin: 0;
 }
-
-/*.icon input:hover{*/
-/*    background: inherit;*/
-
-/*}*/

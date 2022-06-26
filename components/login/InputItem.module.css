@@ -9,30 +9,31 @@
     width: 100%;
     height: 46px;
     border: 0;
-    border-bottom: 1px solid #9e9e9e;
+    border-bottom: 1px solid var(--color-label-color);
     transition: border-bottom, box-shadow .25s ease-in-out;
     font-size: 20px;
     padding: 20px 15px 10px 5px;
     text-align: center;
+    color:var(--color-title-text-color);
 }
 .inputItem > label{
     position: absolute;
     top: 0;
     left: calc(50% - 48px);
     cursor: text;
-    color: #686868;
+    color: var(--color-label-color);
     transform: translateY(13px);
     transition: transform .25s ease-in-out;
     transform-origin: 0 100%;
 }
 .inputItem input:focus{
-    border-bottom: 1px solid var(--color-secondary-400);
-    box-shadow: 0 1px 0 0 var(--color-secondary-400);
+    border-bottom: 1px solid var(--color-title-text-color);
+    box-shadow: 0 1px 0 0 var(--color-title-text-color);
     outline: 1px solid transparent;
 }
 .inputItem input:focus + label{
     transform: translateY(-14px) scale(.8);
-    color: #686868;
+    color: var(--color-title-text-color);
 }
 .inputItem input::-webkit-input-placeholder{
     color: transparent;
@@ -41,7 +42,7 @@
     color: transparent;
 }
 .inputItem input:not(:placeholder-shown){
-    border-bottom: 1px solid #9e9e9e;
+    border-bottom: 1px solid var(--color-label-color);
 }
 .inputItem input:not(:placeholder-shown) + label{
     transform: translateY(-12px) scale(.8);

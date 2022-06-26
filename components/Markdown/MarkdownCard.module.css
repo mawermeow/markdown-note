@@ -4,7 +4,7 @@
 }
 
 .range > button {
-    color:#000000;
+    color:var(--color-sidebar-background-color);
     background: inherit;
     font-weight: 700;
     font-size: .75rem;
@@ -33,8 +33,8 @@
 }
 
 .range .isActive{
-    color:#FFF;
-    background: #000000;
+    color:var(--color-sidebar-cell-text-color);
+    background: var(--color-sidebar-background-color);
 }
 
 .editor.isLeftLog{

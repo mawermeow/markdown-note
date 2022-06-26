@@ -1,7 +1,41 @@
 import type { NextPage } from 'next';
 import MarkdownCard from "../components/Markdown/MarkdownCard";
 
-const DUMMY_CONTENT = [{title:'Daily',content:'This is daily log!'},{title:'Monthly',content:'This is monthly log!'},{title:'Future',content:`
+const DUMMY_CONTENT = [{title:'Daily',content:{
+        "type": "doc",
+        "content": [
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "把每天想要寫的筆記寫在這邊。"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "可以善用事件、任務、註解等要素完成寫子彈筆記。"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph"
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "浮動的選項有兩種：新行預設的與選取文字後的，如果覺得浮動開關很煩，可以從右下角的設定中關掉。"
+                    }
+                ]
+            }
+        ]
+    }},{title:'Monthly',content:'This is monthly log!'},{title:'Future',content:`
     <p>
       Markdown shortcuts make it easy to format the text while typing.
     </p>
@@ -25,4 +59,4 @@ const NotesPage: NextPage = () => {
     </>
 }
 
-export default NotesPage
+export default NotesPage;

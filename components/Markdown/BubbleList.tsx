@@ -2,7 +2,7 @@ import {FC, FormEvent, useState} from 'react';
 import {BubbleMenu} from "@tiptap/react";
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./BubbleList.module.css";
-import {RiPencilLine} from "react-icons/ri";
+import {RiDragMove2Fill, RiPencilLine} from "react-icons/ri";
 
 
 type BubbleListProps = {editor:Editor};
@@ -35,7 +35,7 @@ const BubbleList:FC<BubbleListProps> = ({editor}) =>{
             if(html.includes('<span style="color: #ffa311">')){
                 selectedText = html.split('<span style="color: #ffa311">')[1].split('</span>')[0]
             }
-            editor.chain().focus().setColor('#000000').toggleStrike().run();
+            editor.chain().focus().setColor('#b6b6b6').toggleStrike().run();
             console.log(selectedText);
     };
 
@@ -68,16 +68,14 @@ const BubbleList:FC<BubbleListProps> = ({editor}) =>{
             >
                 <RiPencilLine/>
             </div>
-            <ColorButton
-                buttonText='紅'
-                newColor='#F98181'
-                originColor='#000000'
-            />
-            <ColorButton
-                buttonText='黃'
-                newColor='#FAF594'
-                originColor='#000000'
-            />
+
+            <div
+                className={classes.icon}
+                onClick={()=>editor.chain().focus().selectParentNode().run()}
+            >
+                <RiDragMove2Fill/>
+            </div>
+
             <button
                 onClick={transferNotes}
                 className={editor.isActive('strike') ? classes.isActive : ''}

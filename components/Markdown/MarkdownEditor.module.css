@@ -3,13 +3,12 @@
 }
 
 .editor {
-    background-color: #fff;
-    border: 3px solid #0d0d0d;
+    background-color: var(--color-base-background-color);
+    border: 3px solid var(--color-sidebar-background-color);
     border-radius: 0.75rem;
-    color: #0d0d0d;
+    /*color: var(--color-base-text-color);*/
     display: flex;
     flex-direction: column;
-    /*max-height: 26rem;*/
 }
 
 .isLeftLog{
@@ -18,7 +17,7 @@
 
 .editorHeader {
      align-items: center;
-     border-bottom: 3px solid #0d0d0d;
+     border-bottom: 3px solid var(--color-sidebar-background-color);
      display: flex;
      flex: 0 0 auto;
      flex-wrap: wrap;
@@ -35,8 +34,8 @@
 
 .editorFooter {
      align-items: center;
-     border-top: 3px solid #0d0d0d;
-     color: #0d0d0d;
+     border-top: 3px solid var(--color-sidebar-background-color);
+     /*color: var(--color-sidebar-background-color);*/
      display: flex;
      flex: 0 0 auto;
      font-size: 12px;
@@ -47,7 +46,6 @@
      white-space: nowrap;
  }
 
-/* Some information about the status */
 .editorStatus {
     align-items: center;
     border-radius: 5px;
@@ -78,15 +76,15 @@
     background: none;
     border: none;
     border-radius: 0.4rem;
-    color: #0d0d0d;
+    color: var(--color-sidebar-background-color);
     font: inherit;
     font-size: 12px;
     font-weight: 600;
     padding: 0.25rem 0.5rem;
 }
 .editorSetting button:hover {
-     background-color: #0d0d0d;
-     color: #fff;
+     background-color: var(--color-sidebar-background-color);
+     color: var(--color-sidebar-cell-text-color);
  }
 
 .icon {
@@ -96,11 +94,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #333333;
+    color: var(--color-sidebar-background-color);
 }
 
 .icon:hover {
-    background: #333333;
-    color: #ffffff;
+    background: var(--color-sidebar-background-color);
+    color: var(--color-sidebar-cell-text-color);
     cursor: pointer;
 }

@@ -4,7 +4,7 @@
 }
 
 .outRange button{
-    color:#000000;
+    color:var(--color-sidebar-background-color);
     background: inherit;
     font-weight: 700;
     font-size: .75rem;
@@ -33,15 +33,15 @@
 }
 
 .outRange .isActive{
-    color:#FFF;
-    background: #000000;
+    color:var(--color-sidebar-cell-text-color);
+    background: var(--color-sidebar-background-color);
 }
 
 .loginForm{
-    background-color: #fff;
-    border: 3px solid #0d0d0d;
+    background-color: var(--color-sidebar-cell-text-color);
+    border: 3px solid var(--color-sidebar-background-color);
     border-radius: 0.75rem;
-    color: #0d0d0d;
+    color: var(--color-sidebar-background-color);
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -61,8 +61,8 @@
 }
 
 .loginFormButtonRange{
-    border-top: 3px solid #0d0d0d;
-    color: #0d0d0d;
+    border-top: 3px solid var(--color-sidebar-background-color);
+    color: var(--color-sidebar-background-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,11 +83,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #333333;
 }
 
 .icon:hover {
-    background: #333333;
-    color: #ffffff;
+    background: var(--color-sidebar-background-color);
+    color: var(--color-sidebar-cell-text-color);
     cursor: pointer;
 }
