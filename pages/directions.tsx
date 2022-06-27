@@ -1,6 +1,9 @@
 import type { NextPage } from 'next';
-import MarkdownEditor from "../components/Markdown/MarkdownEditor";
+import Editor from "../components/Markdown/Editor";
 import MainBorder from "../components/ui/card/MainBorder";
+import ContentCard from "../components/ui/card/ContentCard";
+import TopBorder from "../components/ui/card/TopBorder";
+import TopButton from "../components/ui/card/TopButton";
 
 
 const DirectionsPage: NextPage = () => {
@@ -328,9 +331,19 @@ const DirectionsPage: NextPage = () => {
     ]
 }
 
-    return <MainBorder isLeft={false} isVisible={true}>
-        <MarkdownEditor content={directions}/>
+    return <ContentCard>
+        <TopBorder>
+            <div>
+                <TopButton isActive={true}>簡寫</TopButton>
+                <TopButton isActive={false}>快捷鍵</TopButton>
+                <TopButton isActive={false}>功能列</TopButton>
+            </div>
+
+        </TopBorder>
+        <MainBorder isLeft={true} isVisible={true} isEditor={true}>
+        <Editor content={directions}/>
     </MainBorder>
+    </ContentCard>
 }
 
 export default DirectionsPage;

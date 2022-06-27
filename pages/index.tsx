@@ -4,7 +4,7 @@ import Hello from '../components/hello/Hello';
 const Home: NextPage = () => {
   return <>
     <Hello/>
-    {/*<MarkdownCard contents={DUMMY_CONTENT}/>*/}
+    {/*<EditorsCard contents={DUMMY_CONTENT}/>*/}
   </>
 }
 

@@ -1,19 +1,20 @@
 import {FC, useState} from 'react';
 import classes from "./FetchStatus.module.css";
+import useJournal from "../../../hooks/useJournal";
 
-type FetchStatusProps = {
-    fetchStatus:{status:string,message:string};
-};
 
-const FetchStatus:FC<FetchStatusProps> = ({fetchStatus}) =>{
+
+const FetchStatus:FC = () =>{
+    const {journalStatus} = useJournal();
+
     return <>
-        {<span className={
+        <span className={
             `${classes.editorStatus} ${
-                fetchStatus.status==='pending'?classes.editorStatusPending
-                    :fetchStatus.status==='success'?classes.editorStatusSuccess
-                        :fetchStatus.status==='error'?classes.editorStatusError
+                journalStatus.status==='pending'?classes.editorStatusPending
+                    :journalStatus.status==='success'?classes.editorStatusSuccess
+                        :journalStatus.status==='error'?classes.editorStatusError
                             :''}`}>
-                {fetchStatus.message}</span>}
+                {journalStatus.message}</span>
     </>
 };
 

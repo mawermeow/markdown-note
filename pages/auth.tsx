@@ -1,15 +1,13 @@
 import type { NextPage } from 'next';
 import LoginForm from "../components/auth/LoginForm";
-import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {getSession} from "next-auth/client";
 import UserForm from "../components/auth/UserForm";
-
+import Loading from "../components/ui/loading/Loading";
 
 const AuthPage: NextPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isLogin,setIsLogin] = useState(false);
-    const router = useRouter();
 
     useEffect(() => {
         getSession().then(session => {
@@ -23,7 +21,7 @@ const AuthPage: NextPage = () => {
     }, []);
 
     if (isLoading) {
-        return <p>Loading...</p>
+        return <Loading/>
     }
 
     if(isLogin){

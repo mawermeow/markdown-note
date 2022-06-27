@@ -1,3 +1,9 @@
+.spinnerMargin{
+    width: 100%;
+    margin: 3rem auto;
+    text-align: center;
+}
+
 .spinner {
     display: inline-block;
     width: 80px;
@@ -10,9 +16,9 @@
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid var(--color-main-800);
-    border-color: var(--color-main-800) transparent var(--color-main-800) transparent;
-    animation: spinner 1.2s linear infinite;
+    border: 6px solid var(--color-sidebar-background-color);
+    border-color: var(--color-sidebar-background-color) transparent var(--color-sidebar-background-color) transparent;
+    animation: spinner 2s linear infinite;
 }
 @keyframes spinner {
     0% {

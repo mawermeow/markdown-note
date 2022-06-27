@@ -15,7 +15,7 @@ const InputItem:FC<InputItemProps>=(props)=>{
 
     let icon;
 
-    if(placeholder==='Password'){
+    if(placeholder.includes('Password')){
         icon = <RiLock2Line/>;
     }
 

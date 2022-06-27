@@ -20,10 +20,15 @@ import {
     RiSave3Line
 
 } from 'react-icons/ri'
+import ActionIcon from "../ui/card/ActionIcon";
+import ActionDivider from "../ui/card/ActionDivider";
+import {createLink} from "../../lib/clipboard";
+import useJournal from "../../hooks/useJournal";
 
-type ToolbarProps = {editor:Editor}
+type ToolbarProps = {title:string,editor:Editor}
 
-const Toolbar:FC<ToolbarProps> = ({editor}) =>{
+const Toolbar:FC<ToolbarProps> = ({title,editor}) =>{
+    const {setJournals}=useJournal();
 
     if(!editor){return <span>Loading</span>}
 
@@ -34,72 +39,65 @@ const Toolbar:FC<ToolbarProps> = ({editor}) =>{
 
     return <>
     <div className={classes.Toolbar}>
-        <div className={classes.icon} onClick={() => editor.chain().focus().toggleBold().run()}>
+        <ActionIcon onClick={() => editor.chain().focus().toggleBold().run()}>
             <RiBold />
-        </div>
-        <div className={classes.icon} onClick={() => editor.chain().focus().toggleItalic().run()}>
+        </ActionIcon>
+        <ActionIcon onClick={() => editor.chain().focus().toggleItalic().run()}>
             <RiItalic />
-        </div>
-        <div className={classes.icon} onClick={() => editor.chain().focus().toggleStrike().run()}>
+        </ActionIcon>
+        <ActionIcon onClick={() => editor.chain().focus().toggleStrike().run()}>
             <RiStrikethrough />
-        </div>
-        <div className={classes.icon} onClick={() => editor.chain().focus().toggleCode().run()}>
+        </ActionIcon>
+        <ActionIcon onClick={() => editor.chain().focus().toggleCode().run()}>
             <RiCodeSSlashLine />
-        </div>
-        <div className={classes.divider}/>
-        <div
-            className={classes.icon}
+        </ActionIcon>
+        <ActionDivider/>
+        <ActionIcon
             onClick={() => editor.chain().focus().toggleOrderedList().run()}>
             <RiListOrdered />
-        </div>
-        <div
-            className={classes.icon}
+        </ActionIcon>
+        <ActionIcon
             onClick={() => editor.chain().focus().toggleBulletList().run()}>
             <RiListUnordered />
-        </div>
-        <div
-            className={classes.icon}
+        </ActionIcon>
+        <ActionIcon
             onClick={() => editor.chain().focus().toggleTaskList().run()}>
             <RiCheckboxLine />
-        </div>
-        <div
-            className={classes.icon}
+        </ActionIcon>
+        <ActionIcon
             onClick={() => editor.chain().focus().toggleBlockquote().run()}>
             <RiDoubleQuotesL />
-        </div>
+        </ActionIcon>
 
-        <div className={classes.divider}/>
+        <ActionDivider/>
 
-        <div
-            className={classes.icon}
+        <ActionIcon
             onClick={() => editor.chain().focus().toggleCodeBlock().run()}>
             <RiCodeBoxLine />
-        </div>
-        <div
-            className={classes.icon}
+        </ActionIcon>
+        <ActionIcon
             onClick={() => editor.chain().focus().setHorizontalRule().run()}>
             <RiSeparator />
-        </div>
-        <div
-            className={classes.icon}
+        </ActionIcon>
+        <ActionIcon
             onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}>
             <RiFormatClear />
-        </div>
-
-        <div className={classes.divider}/>
-
-        <div className={classes.icon} onClick={() => setLink(editor)}>
+        </ActionIcon>
+        <ActionIcon onClick={() => setLink(editor)}>
             <RiLink />
-        </div>
+        </ActionIcon>
 
-        <div className={classes.divider}/>
+        <ActionDivider/>
 
-        <div className={classes.icon} onClick={() => console.log(editor.getJSON())}>
+        <ActionIcon onClick={ async () => {
+            const json = editor.getJSON()
+            await setJournals({title, content:json});
+        }}>
             <RiSave3Line />
-        </div>
-        <div className={classes.icon}>
+        </ActionIcon>
+        <ActionIcon>
             <RiSettings3Line/>
-        </div>
+        </ActionIcon>
         {/*<div className={classes.icon} onClick={() => editor.chain().focus().undo().run()}>*/}
         {/*    <RiArrowGoBackLine />*/}
         {/*</div>*/}

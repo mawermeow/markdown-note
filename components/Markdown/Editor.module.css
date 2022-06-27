@@ -25,32 +25,6 @@
      -webkit-overflow-scrolling: touch;
  }
 
-.editorStatus {
-    align-items: center;
-    border-radius: 5px;
-    display: flex;
-}
-.editorStatus::before {
-     background: var(--color-accent-color);
-     border-radius: 50%;
-     content: " ";
-     display: inline-block;
-     flex: 0 0 auto;
-     height: 0.5rem;
-     margin-right: 0.5rem;
-     width: 0.5rem;
- }
-
-.editorStatusConnecting::before {
-     background: #616161;
- }
-
-.editorStatusConnected::before {
-     background: #b9f18d;
- }
-
-
-
 .editorSetting button {
     background: none;
     border: none;
