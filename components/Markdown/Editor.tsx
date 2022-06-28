@@ -6,6 +6,7 @@ import Toolbar from "./Toolbar";
 import ActionBorder from "../ui/card/ActionBorder";
 import useCustomEditor from "../../hooks/useCustomEditor";
 import {EditorContent} from "@tiptap/react";
+import useUserHabits from "../../hooks/useUserHabits";
 
 type EditorProps = {
     title:string,
@@ -17,12 +18,16 @@ type EditorProps = {
 const Editor: React.FC<EditorProps> = ({title,content,isVisible=true,isLeftLog}) => {
 
     const editor = useCustomEditor(title,content);
+    const {isToolbarSetMode} = useUserHabits();
 
     return (
         <>
             {editor && <BubbleList editor={editor}/>}
             {editor && <FloatingList editor={editor}/>}
             <EditorContent className={classes.editorContent} editor={editor}/>
+            {isToolbarSetMode && <ActionBorder>
+                {editor && <Toolbar title={title} editor={editor} setComponent={true}/>}
+            </ActionBorder>}
             <ActionBorder>
                 {editor && <Toolbar title={title} editor={editor}/>}
             </ActionBorder>

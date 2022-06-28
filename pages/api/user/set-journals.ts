@@ -11,12 +11,21 @@ async function handler(req:NextApiRequest, res:NextApiResponse) {
     if(isUser){
         const {client, usersCollection, user, username} = isUser;
 
-        const newJournals = req.body;
+        const {newJournals, newToolbars} = req.body;
 
-        await usersCollection.updateOne(
-            {username:username},
-            {$set: {journals: newJournals}}
-        );
+        if(newJournals){
+            await usersCollection.updateOne(
+                {username:username},
+                {$set: {journals: newJournals}}
+            );
+        }
+        if(newToolbars){
+            await usersCollection.updateOne(
+                {username:username},
+                {$set: {toolbars: newToolbars}}
+            );
+        }
+
 
         await client.close();
         res.status(200).json({ message: 'Journals updated!' });

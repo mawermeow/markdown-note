@@ -1,5 +1,8 @@
 .actionBorder{
+    background: var(--color-base-background-color);
     border-top: 3px solid var(--color-sidebar-background-color);
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -10,5 +13,12 @@
     padding: 0.25rem 0.75rem;
     white-space: nowrap;
     width: 100%;
-    margin: auto;
+    height: 40px;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+.actionBorder.sticky {
+    border-bottom: 2px solid transparent;
 }

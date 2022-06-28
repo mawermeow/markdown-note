@@ -9,6 +9,7 @@ import TopBorder from "../ui/card/TopBorder";
 import MainBorder from "../ui/card/MainBorder";
 import ActionBorder from "../ui/card/ActionBorder";
 import useJournal from "../../hooks/useJournal";
+import useUserHabits from "../../hooks/useUserHabits";
 
 const changeUserPassword = async (oldPassword: string, newPassword: string) => {
     const response = await fetch('/api/user/change-password', {
@@ -31,7 +32,8 @@ const UserForm: FC = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
 
-    const{updateStatus,username} = useJournal();
+    const {updateStatus} = useJournal();
+    const {username} = useUserHabits();
 
     const changePasswordHandler = async (event:FormEvent) => {
         event.preventDefault();
@@ -52,7 +54,7 @@ const UserForm: FC = () => {
     return <>
         <ContentCard>
             <MainBorder isLeft={false} isVisible={true}>
-                Hello, {username} !
+                Hello, {username}
             </MainBorder>
         </ContentCard>
         <ContentCard>

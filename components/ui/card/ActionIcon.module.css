@@ -7,10 +7,11 @@
     align-items: center;
     color: var(--color-sidebar-background-color);
     margin-left: 3px;
+    font-size: 20px;
 }
-.actionIcon .disabled {
+.used {
     color: rgba(51,51,51, 0.5);
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 .actionIcon:hover {

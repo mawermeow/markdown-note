@@ -43,7 +43,8 @@ const handler = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
     const result = await db.collection('users').insertOne({
         username: username,
         password: hashedPassword,
-        journals:[{title:'Daily',content:''},{title:'Monthly',content:''},{title:'Future',content:''}]
+        journals:[{title:'Daily',content:''},{title:'Monthly',content:''},{title:'Future',content:''}],
+        toolbars:['', 'bold', 'italic', 'strike', 'clear', 'divider1', 'orderedList', 'bulletList', 'taskList', 'blockQuote', 'divider2', 'horizon', 'link', 'divider3'],
     });
 
     res.status(201).json({ message: 'account registration completed' });

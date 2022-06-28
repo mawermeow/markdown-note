@@ -3,8 +3,9 @@ import Hello from '../components/hello/Hello';
 
 const Home: NextPage = () => {
   return <>
+
     <Hello/>
-    {/*<EditorsCard contents={DUMMY_CONTENT}/>*/}
+
   </>
 }
 

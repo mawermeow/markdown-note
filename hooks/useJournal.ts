@@ -5,7 +5,7 @@ import {getSession} from "next-auth/client";
 
 
 const useJournal=()=>{
-    const {journals, updateJournals, journalStatus, updateStatus,username} = useContext(JournalContext);
+    const {journals, updateJournals, journalStatus, updateStatus, renderUsername, renderUserToolbar} = useContext(JournalContext);
 
     const getJournals = async ()=>{
         updateStatus({status:'pending',message:'Getting notes...'});
@@ -15,8 +15,9 @@ const useJournal=()=>{
             updateStatus({status:'error',message:data.message});
             return;
         }
-        updateJournals(data.journals, data.username);
-
+        updateJournals(data.journals);
+        renderUsername(data.username);
+        renderUserToolbar(data.toolbars);
         updateStatus({status:'success',message:'Take notes successfully'});
     };
 
@@ -42,7 +43,7 @@ const useJournal=()=>{
             updateStatus({status:'pending',message:`Saving ${title}...`});
             const res = await fetch('/api/user/set-journals',{
                 method: 'PATCH',
-                body: JSON.stringify(newJournals),
+                body: JSON.stringify({newJournals}),
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -51,15 +52,14 @@ const useJournal=()=>{
             if(!res.ok){
                 updateStatus({status:'error',message:data.message});
             }else{
+                updateJournals(newJournals);
                 updateStatus({status:'success',message:`Save ${title} successfully!`});
             }
 
         }
     };
 
-
-
-    return {journals, journalStatus,updateStatus, setJournals,username};
+    return {journals, journalStatus,updateStatus, setJournals};
 }
 
 export default useJournal;

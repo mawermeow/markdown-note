@@ -13,7 +13,14 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import Blockquote from "@tiptap/extension-blockquote";
 import Code from "@tiptap/extension-code";
 import CodeBlock from "@tiptap/extension-code-block";
+import {Editor} from "@tiptap/core";
+import useKeyPress from "./useKeyPress";
 
+const createLink= (editor:Editor)=>{
+    navigator.clipboard.readText().then(text=>{
+        editor.commands.setLink({href:text});
+    })
+}
 
 const CustomBulletList = BulletList.extend({
     addKeyboardShortcuts() {
@@ -65,7 +72,8 @@ const CustomCodeBlock = CodeBlock.extend({
 
 const useCustomEditor = (title:string,content: string | {}) => {
     const {setJournals}=useJournal();
-    return useEditor({
+
+    const editor =  useEditor({
         extensions: [
             StarterKit.configure({
                 bulletList: false,
@@ -98,6 +106,14 @@ const useCustomEditor = (title:string,content: string | {}) => {
             await setJournals({title, content:json});
         },
     });
+
+    useKeyPress(['Meta', 'k'], (event:KeyboardEvent)=>{
+        if(editor){
+            createLink(editor);
+        }
+    });
+
+    return editor;
 }
 
 export default useCustomEditor;

@@ -1,7 +1,8 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./Toolbar.module.css";
 import {setLink} from "../../lib/setLink";
+
 import {
     RiBold,
     RiItalic,
@@ -18,92 +19,83 @@ import {
     RiListUnordered,
     RiSettings3Line,
     RiSave3Line
-
 } from 'react-icons/ri'
 import ActionIcon from "../ui/card/ActionIcon";
 import ActionDivider from "../ui/card/ActionDivider";
-import {createLink} from "../../lib/clipboard";
 import useJournal from "../../hooks/useJournal";
+import useUserHabits from "../../hooks/useUserHabits";
 
-type ToolbarProps = {title:string,editor:Editor}
+type ToolBoxItem = {name:string, icon:JSX.Element, method:()=>void };
 
-const Toolbar:FC<ToolbarProps> = ({title,editor}) =>{
-    const {setJournals}=useJournal();
+type ToolbarProps = {
+    title:string,
+    editor:Editor,
+    setComponent?:boolean,
+}
+
+const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
+
+    const {userToolbar, toggleTool, isToolbarSetMode, saveToolbarSetting} = useUserHabits();
+    const {setJournals} = useJournal();
+
+
+
+    const allToolbarList:ToolBoxItem[] = [
+        {name:'bold', icon:<RiBold />, method:() => editor.chain().focus().toggleBold().run()},
+        {name:'italic', icon:<RiItalic />, method:() => editor.chain().focus().toggleItalic().run()},
+        {name:'strike', icon:<RiStrikethrough />, method:() => editor.chain().focus().toggleStrike().run()},
+        {name:'code', icon:<RiCodeSSlashLine />, method:() => editor.chain().focus().toggleCode().run()},
+        {name:'orderedList', icon:<RiListOrdered />, method:()=>editor.chain().focus().toggleOrderedList().run()},
+        {name:'bulletList', icon:<RiListUnordered />, method:() => editor.chain().focus().toggleBulletList().run()},
+        {name:'taskList', icon:<RiCheckboxLine />, method:() => editor.chain().focus().toggleTaskList().run()},
+        {name:'blockQuote', icon:<RiDoubleQuotesL />, method:() => editor.chain().focus().toggleBlockquote().run()},
+        {name:'blockCode', icon:<RiCodeBoxLine />, method:() => editor.chain().focus().toggleCodeBlock().run()},
+        {name:'horizon', icon:<RiSeparator />, method:() => editor.chain().focus().setHorizontalRule().run()},
+        {name:'clear', icon:<RiFormatClear />, method:() => editor.chain().focus().unsetAllMarks().clearNodes().run()},
+        {name:'link', icon:<RiLink />, method:() => setLink(editor)},
+        {name:'undo', icon:<RiArrowGoBackLine />, method:() => editor.chain().focus().undo().run()},
+        {name:'redo', icon:<RiArrowGoForwardLine />, method:() => editor.chain().focus().redo().run()},
+        {name:'save', icon:<RiSave3Line />, method: async() => await setJournals({title, content:editor.getJSON()})},
+        {name:'divider1', icon:<>|</>, method:()=>toggleTool('divider1')},
+        {name:'divider2', icon:<>|</>, method:()=>toggleTool('divider2')},
+        {name:'divider3', icon:<>|</>, method:()=>toggleTool('divider3')}
+    ];
+
+    const allToolbarMenu = allToolbarList.map(tool=> <ActionIcon
+        canDisabled={tool.name} key={tool.name} value={tool.icon} onClick={() => toggleTool(tool.name)}/>);
+
+    let customToolbar:JSX.Element[]=[];
+    let customToolbarMenu:JSX.Element[]=[];
+
+    userToolbar.forEach(userTool=>{
+        if(userTool.includes('divider')){
+            customToolbar.push(<ActionDivider key={userTool} />);
+            customToolbarMenu.push(<ActionDivider key={userTool} />)
+        }else{
+            let targetTool:ToolBoxItem|undefined={name:'',icon:<></>,method:()=>{}};
+            targetTool = allToolbarList.find(tool=>userTool === tool.name);
+            if(targetTool){
+                const {name, icon ,method} = targetTool;
+                customToolbar.push(<ActionIcon key={name} value={icon} onClick={method}/>);
+                customToolbarMenu.push(<ActionIcon key={name} value={icon}
+                                                   onClick={() => toggleTool(name)}/>)
+            }
+        }
+    })
 
     if(!editor){return <span>Loading</span>}
 
-    // const { observe, inView } = useInView({
-    //     rootMargin: '-1px 0px 0px 0px',
-    //     threshold: [1],
-    // })
-
     return <>
     <div className={classes.Toolbar}>
-        <ActionIcon onClick={() => editor.chain().focus().toggleBold().run()}>
-            <RiBold />
-        </ActionIcon>
-        <ActionIcon onClick={() => editor.chain().focus().toggleItalic().run()}>
-            <RiItalic />
-        </ActionIcon>
-        <ActionIcon onClick={() => editor.chain().focus().toggleStrike().run()}>
-            <RiStrikethrough />
-        </ActionIcon>
-        <ActionIcon onClick={() => editor.chain().focus().toggleCode().run()}>
-            <RiCodeSSlashLine />
-        </ActionIcon>
-        <ActionDivider/>
-        <ActionIcon
-            onClick={() => editor.chain().focus().toggleOrderedList().run()}>
-            <RiListOrdered />
-        </ActionIcon>
-        <ActionIcon
-            onClick={() => editor.chain().focus().toggleBulletList().run()}>
-            <RiListUnordered />
-        </ActionIcon>
-        <ActionIcon
-            onClick={() => editor.chain().focus().toggleTaskList().run()}>
-            <RiCheckboxLine />
-        </ActionIcon>
-        <ActionIcon
-            onClick={() => editor.chain().focus().toggleBlockquote().run()}>
-            <RiDoubleQuotesL />
-        </ActionIcon>
-
-        <ActionDivider/>
-
-        <ActionIcon
-            onClick={() => editor.chain().focus().toggleCodeBlock().run()}>
-            <RiCodeBoxLine />
-        </ActionIcon>
-        <ActionIcon
-            onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-            <RiSeparator />
-        </ActionIcon>
-        <ActionIcon
-            onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}>
-            <RiFormatClear />
-        </ActionIcon>
-        <ActionIcon onClick={() => setLink(editor)}>
-            <RiLink />
-        </ActionIcon>
-
-        <ActionDivider/>
-
-        <ActionIcon onClick={ async () => {
-            const json = editor.getJSON()
-            await setJournals({title, content:json});
-        }}>
-            <RiSave3Line />
-        </ActionIcon>
-        <ActionIcon>
-            <RiSettings3Line/>
-        </ActionIcon>
-        {/*<div className={classes.icon} onClick={() => editor.chain().focus().undo().run()}>*/}
-        {/*    <RiArrowGoBackLine />*/}
-        {/*</div>*/}
-        {/*<div className={classes.icon} onClick={() => editor.chain().focus().redo().run()}>*/}
-        {/*    <RiArrowGoForwardLine />*/}
-        {/*</div>*/}
+        {!setComponent && !isToolbarSetMode &&<>
+            {customToolbar}
+            <ActionIcon value={<RiSettings3Line/>} onClick={saveToolbarSetting}/>
+        </>}
+        {!setComponent && isToolbarSetMode &&<>
+            {customToolbarMenu}
+            <ActionIcon value={<RiSettings3Line/>} onClick={saveToolbarSetting}/>
+        </>}
+        { setComponent && isToolbarSetMode && allToolbarMenu }
     </div>
     </>
 };
