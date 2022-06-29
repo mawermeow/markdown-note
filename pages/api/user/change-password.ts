@@ -1,6 +1,6 @@
 import { hashPassword, verifyPassword } from '../../../lib/auth';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import searchUser from "../../../lib/searchUser";
+import searchUser from "../../../lib/checkUserAuth";
 
 async function handler(req:NextApiRequest, res:NextApiResponse) {
     if (req.method !== 'PATCH') {

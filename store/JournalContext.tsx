@@ -1,32 +1,40 @@
-import {createContext, FC, ReactNode, useEffect, useState} from "react";
+import {createContext, Dispatch, FC, ReactNode, SetStateAction, useEffect, useState} from "react";
 import {JournalData, JournalStatus} from "../types/Journal";
 
 interface JournalContextInterface {
     journals: JournalData[] | undefined,
+    renderJournals: (newJournals: JournalData[]) => void,
     journalStatus: JournalStatus,
-    updateJournals: (newJournals: JournalData[]) => void,
     updateStatus: (newStatus: JournalStatus) => void,
     username: string,
     renderUsername: (journalOwner: string) => void,
     userToolbar: string[],
+    renderUserToolbar:(newToolbar:string[])=>void,
     toggleTool: (newTool: string) => void,
     isToolbarSetMode: boolean,
     toggleToolbarSetting: () => void,
-    renderUserToolbar:(newToolbar:string[])=>void,
+    transText:string,
+    updateTransText:(newTransText:string)=>void,
+    deleteHolder:string,
+    updateDeleteHolder:(deleteTitle:string)=>void,
 }
 
 const JournalContext = createContext<JournalContextInterface>({
     journals:undefined,
-    updateJournals:(newJournals)=>{},
+    renderJournals:(newJournals)=>{},
     journalStatus:{status:'',message:''},
     updateStatus:(newStatus)=>{},
     username:'',
     renderUsername:(journalOwner)=>{},
     userToolbar:[],
-    toggleTool:(newTool)=>{},
+    renderUserToolbar:()=>{},
     isToolbarSetMode:false,
     toggleToolbarSetting:()=>{},
-    renderUserToolbar:()=>{},
+    toggleTool:(newTool)=>{},
+    transText:'',
+    updateTransText:(newTransText:string)=>{},
+    deleteHolder:'',
+    updateDeleteHolder:()=>{},
 });
 
 type JournalContextProviderProps={
@@ -36,11 +44,25 @@ type JournalContextProviderProps={
 export const JournalContextProvider:FC<JournalContextProviderProps> = (props) => {
     let journalsInit:JournalData[]|undefined;
     const [journals, setJournals] = useState(journalsInit);
+
     const journalStatusInit = {status:'',message:''};
     const [journalStatus, setJournalStatus] = useState(journalStatusInit);
+
     const [username,setUsername]=useState('');
     const [userToolbar,setUserToolbar] = useState(['', 'bold', 'italic', 'strike', 'clear', 'divider1', 'orderedList', 'bulletList', 'taskList', 'blockQuote', 'divider2', 'horizon', 'link', 'divider3']);
     const [isToolbarSetMode,setIsToolbarSetMode] = useState(false);
+
+    const [transText,setTransText] = useState('');
+
+    const [deleteHolder, setDeleteHolder] =useState('');
+
+    const updateDeleteHolder=(deleteTitle:string)=>{
+        setDeleteHolder(deleteTitle);
+    };
+
+    const updateTransText=(newTransText:string)=>{
+        setTransText(newTransText);
+    };
 
     const renderUserToolbar=(newToolbar:string[])=>{
         setUserToolbar(newToolbar);
@@ -58,11 +80,11 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
         }
     };
 
-    const updateUsername = (journalOwner:string)=>{
+    const renderUsername = (journalOwner:string)=>{
         setUsername(journalOwner);
     }
 
-    const updateJournals=(newJournals:JournalData[])=>{
+    const renderJournals=(newJournals:JournalData[])=>{
         setJournals(newJournals);
     };
 
@@ -83,16 +105,20 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
 
     const context:JournalContextInterface = {
         journals,
-        updateJournals,
+        renderJournals,
         journalStatus,
         updateStatus,
         username,
-        renderUsername: updateUsername,
+        renderUsername,
         userToolbar,
         toggleTool,
         isToolbarSetMode,
         toggleToolbarSetting,
         renderUserToolbar,
+        transText,
+        updateTransText,
+        deleteHolder,
+        updateDeleteHolder,
     };
 
     return <JournalContext.Provider value={context}>

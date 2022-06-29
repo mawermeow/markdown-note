@@ -1,4 +1,3 @@
-export const getPaste = async ()=>{
-    const text =  await navigator.clipboard.readText();
-    return text.toString();
+export const getCopyText = async ()=>{
+    return await navigator.clipboard.readText();
 };

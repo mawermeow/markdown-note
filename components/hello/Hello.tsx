@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import classes from "./Hello.module.css";
-import Image from "next/image";
 import Directions from "../../pages/directions";
 
 const Hello: FC = () => {
@@ -14,7 +13,7 @@ const Hello: FC = () => {
                        height={660}
                       className={classes.background}/>
                 <div className={classes.floatAnimation}>
-                    <h1>Moni Note</h1>
+                    <h1>Bullet Note</h1>
                 </div>
             </div>
             <section>

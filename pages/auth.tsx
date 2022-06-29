@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import LoginForm from "../components/auth/LoginForm";
+import LoginForm from "../components/form/LoginForm";
 import {useEffect, useState} from "react";
 import {getSession} from "next-auth/client";
-import UserForm from "../components/auth/UserForm";
+import UserForm from "../components/form/UserForm";
 import Loading from "../components/ui/loading/Loading";
 
 const AuthPage: NextPage = () => {

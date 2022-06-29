@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import classes from "./FetchStatus.module.css";
-import useJournal from "../../../hooks/useJournal";
+import useJournal from "../../../../hooks/useJournal";
 
 
 

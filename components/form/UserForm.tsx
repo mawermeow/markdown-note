@@ -1,15 +1,14 @@
 import {FC, FormEvent, useState} from 'react';
-import classes from "./LoginForm.module.css";
 import {signout} from "next-auth/client";
-import InputItem from "./InputItem";
-import FetchStatus from "../ui/card/FetchStatus";
-import TopButton from "../ui/card/TopButton";
+import InputItem from "../ui/form/InputItem";
+import FetchStatus from "../ui/card/top/FetchStatus";
+import TopButton from "../ui/card/top/TopButton";
 import ContentCard from "../ui/card/ContentCard";
-import TopBorder from "../ui/card/TopBorder";
+import TopBorder from "../ui/card/top/TopBorder";
 import MainBorder from "../ui/card/MainBorder";
-import ActionBorder from "../ui/card/ActionBorder";
 import useJournal from "../../hooks/useJournal";
 import useUserHabits from "../../hooks/useUserHabits";
+import MainFormBorder from "../ui/form/MainFormBorder";
 
 const changeUserPassword = async (oldPassword: string, newPassword: string) => {
     const response = await fetch('/api/user/change-password', {
@@ -72,31 +71,49 @@ const UserForm: FC = () => {
             </div>
             <FetchStatus/>
         </TopBorder>
-        <form onSubmit={changePasswordHandler}>
-            <MainBorder isLeft={true} isVisible={true}>
-                <div className={classes.loginFormInputItem}>
-                    <InputItem
-                        type='password'
-                        id='oldPassword'
-                        placeholder='Old Password'
-                        value={oldPassword}
-                        onChange={(input) => setOldPassword(input)}
-                    />
-                    <InputItem
-                        type='password'
-                        id='newPassword'
-                        placeholder='New Password'
-                        value={newPassword}
-                        onChange={(input) => setNewPassword(input)}
-                    />
-                </div>
-                <ActionBorder>
-                    <button className={classes.icon}>
-                        Change
-                    </button>
-                </ActionBorder>
-            </MainBorder>
-        </form>
+            <MainFormBorder isLeft={true} isVisible={true} onSubmit={changePasswordHandler}
+                            buttonValue='Change'
+            >
+                <InputItem
+                    type='password'
+                    id='oldPassword'
+                    placeholder='Old Password'
+                    value={oldPassword}
+                    onChange={(input) => setOldPassword(input)}
+                />
+                <InputItem
+                    type='password'
+                    id='newPassword'
+                    placeholder='New Password'
+                    value={newPassword}
+                    onChange={(input) => setNewPassword(input)}
+                />
+            </MainFormBorder>
+        {/*<form onSubmit={changePasswordHandler}>*/}
+        {/*    <MainBorder isLeft={true} isVisible={true}>*/}
+        {/*        <div className={classes.loginFormInputItem}>*/}
+        {/*            <InputItem*/}
+        {/*                type='password'*/}
+        {/*                id='oldPassword'*/}
+        {/*                placeholder='Old Password'*/}
+        {/*                value={oldPassword}*/}
+        {/*                onChange={(input) => setOldPassword(input)}*/}
+        {/*            />*/}
+        {/*            <InputItem*/}
+        {/*                type='password'*/}
+        {/*                id='newPassword'*/}
+        {/*                placeholder='New Password'*/}
+        {/*                value={newPassword}*/}
+        {/*                onChange={(input) => setNewPassword(input)}*/}
+        {/*            />*/}
+        {/*        </div>*/}
+        {/*        <ActionBorder>*/}
+        {/*            <button className={classes.icon}>*/}
+        {/*                Change*/}
+        {/*            </button>*/}
+        {/*        </ActionBorder>*/}
+        {/*    </MainBorder>*/}
+        {/*</form>*/}
     </ContentCard></>
 };
 

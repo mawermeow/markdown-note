@@ -1,16 +1,13 @@
 import {FC, FormEvent, useState} from 'react';
-import InputItem from "./InputItem";
-
-import classes from "./LoginForm.module.css";
+import InputItem from "../ui/form/InputItem";
 import {signIn} from "next-auth/client";
 import {useRouter} from "next/router";
-import FetchStatus from "../ui/card/FetchStatus";
+import FetchStatus from "../ui/card/top/FetchStatus";
 import ContentCard from "../ui/card/ContentCard";
-import TopButton from "../ui/card/TopButton";
-import TopBorder from "../ui/card/TopBorder";
-import MainBorder from "../ui/card/MainBorder";
-import ActionBorder from "../ui/card/ActionBorder";
+import TopButton from "../ui/card/top/TopButton";
+import TopBorder from "../ui/card/top/TopBorder";
 import useJournal from "../../hooks/useJournal";
+import MainFormBorder from "../ui/form/MainFormBorder";
 
 
 const createUser=async (username:string, password:string)=>{
@@ -93,37 +90,29 @@ const LoginForm: FC = () => {
             </div>
             <FetchStatus/>
         </TopBorder>
-        <form onSubmit={submitHandler}>
-            <MainBorder isLeft={isLoginMode} isVisible={true}>
-                <div className={classes.loginFormInputItem}>
-                    <InputItem
-                        type='username'
-                        id='username'
-                        placeholder='Username'
-                        value={username}
-                        onChange={(input) => {
-                            setUsername(input);
-                            updateStatus({status:'',message:''});
-                        }}
-                    />
-                    <InputItem
-                        type='password'
-                        id='password'
-                        placeholder='Password'
-                        value={password}
-                        onChange={(input) => {
-                            setPassword(input);
-                            updateStatus({status:'',message:''});
-                        }}
-                    />
-                </div>
-                <ActionBorder>
-                        <button className={classes.icon}>
-                            {isLoginMode ?'Login':'Sign Up'}
-                        </button>
-                </ActionBorder>
-            </MainBorder>
-        </form>
+        <MainFormBorder isLeft={isLoginMode} isVisible={true} onSubmit={submitHandler}
+                        buttonValue={isLoginMode ?'Login':'Sign Up'}>
+            <InputItem
+                type='text'
+                id='username'
+                placeholder='Username'
+                value={username}
+                onChange={(input) => {
+                    setUsername(input);
+                    updateStatus({status:'',message:''});
+                }}
+            />
+            <InputItem
+                type='password'
+                id='password'
+                placeholder='Password'
+                value={password}
+                onChange={(input) => {
+                    setPassword(input);
+                    updateStatus({status:'',message:''});
+                }}
+            />
+        </MainFormBorder>
     </ContentCard>
 };
 

@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./Toolbar.module.css";
-import {setLink} from "../../lib/setLink";
+import {addImage, addLink, clickAlignHandler} from "../../lib/editorLib";
 
 import {
     RiBold,
@@ -14,11 +14,27 @@ import {
     RiSeparator,
     RiFormatClear,
     RiArrowGoBackLine,
-    RiArrowGoForwardLine, RiCheckboxLine,
+    RiArrowGoForwardLine,
+    RiCheckboxLine,
     RiListOrdered,
     RiListUnordered,
     RiSettings3Line,
-    RiSave3Line
+    RiSave3Line,
+    RiImageLine,
+    RiTable2,
+    RiLayoutGridLine,
+    RiInsertColumnLeft,
+    RiInsertColumnRight,
+    RiDeleteColumn,
+    RiInsertRowTop,
+    RiInsertRowBottom,
+    RiDeleteRow,
+    RiLayoutGridFill,
+    RiLayout5Line,
+    RiLayoutLeft2Line,
+    RiLayoutTop2Line,
+    RiAlignRight,
+    RiAlignCenter, RiAlignLeft, RiDeleteBinLine,
 } from 'react-icons/ri'
 import ActionIcon from "../ui/card/ActionIcon";
 import ActionDivider from "../ui/card/ActionDivider";
@@ -36,7 +52,7 @@ type ToolbarProps = {
 const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
 
     const {userToolbar, toggleTool, isToolbarSetMode, saveToolbarSetting} = useUserHabits();
-    const {setJournals} = useJournal();
+    const {updateContentToDB, updateDeleteHolder, deleteHolder} = useJournal();
 
 
 
@@ -44,21 +60,35 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'bold', icon:<RiBold />, method:() => editor.chain().focus().toggleBold().run()},
         {name:'italic', icon:<RiItalic />, method:() => editor.chain().focus().toggleItalic().run()},
         {name:'strike', icon:<RiStrikethrough />, method:() => editor.chain().focus().toggleStrike().run()},
-        {name:'code', icon:<RiCodeSSlashLine />, method:() => editor.chain().focus().toggleCode().run()},
+        {name:'clear', icon:<RiFormatClear />, method:() => editor.chain().focus().unsetAllMarks().clearNodes().run()},
+        {name:'alignCenter', icon:<RiAlignCenter />, method:() => clickAlignHandler(editor)},
+        {name:'divider3', icon:<>|</>, method:()=>toggleTool('divider3')},
+        {name:'blockQuote', icon:<RiDoubleQuotesL />, method:() => editor.chain().focus().toggleBlockquote().run()},
         {name:'orderedList', icon:<RiListOrdered />, method:()=>editor.chain().focus().toggleOrderedList().run()},
         {name:'bulletList', icon:<RiListUnordered />, method:() => editor.chain().focus().toggleBulletList().run()},
         {name:'taskList', icon:<RiCheckboxLine />, method:() => editor.chain().focus().toggleTaskList().run()},
-        {name:'blockQuote', icon:<RiDoubleQuotesL />, method:() => editor.chain().focus().toggleBlockquote().run()},
+        {name:'code', icon:<RiCodeSSlashLine />, method:() => editor.chain().focus().toggleCode().run()},
         {name:'blockCode', icon:<RiCodeBoxLine />, method:() => editor.chain().focus().toggleCodeBlock().run()},
+        {name:'divider2', icon:<>|</>, method:()=>toggleTool('divider2')},
         {name:'horizon', icon:<RiSeparator />, method:() => editor.chain().focus().setHorizontalRule().run()},
-        {name:'clear', icon:<RiFormatClear />, method:() => editor.chain().focus().unsetAllMarks().clearNodes().run()},
-        {name:'link', icon:<RiLink />, method:() => setLink(editor)},
+        {name:'link', icon:<RiLink />, method:() => addLink(editor)},
+        {name:'image', icon:<RiImageLine />, method:() => addImage(editor)},
         {name:'undo', icon:<RiArrowGoBackLine />, method:() => editor.chain().focus().undo().run()},
         {name:'redo', icon:<RiArrowGoForwardLine />, method:() => editor.chain().focus().redo().run()},
-        {name:'save', icon:<RiSave3Line />, method: async() => await setJournals({title, content:editor.getJSON()})},
+        {name:'save', icon:<RiSave3Line />, method: async() => await updateContentToDB({title, content:editor.getJSON()})},
         {name:'divider1', icon:<>|</>, method:()=>toggleTool('divider1')},
-        {name:'divider2', icon:<>|</>, method:()=>toggleTool('divider2')},
-        {name:'divider3', icon:<>|</>, method:()=>toggleTool('divider3')}
+        {name:'table', icon:<RiLayoutGridLine />, method:() => editor.commands.insertTable({ rows: 3, cols: 3, withHeaderRow: true })},
+        {name:'tableDel', icon:<RiLayoutGridFill />, method:() => editor.commands.deleteTable()},
+        {name:'colLeft', icon:<RiInsertColumnLeft />, method:() => editor.commands.addColumnBefore()},
+        {name:'colRight', icon:<RiInsertColumnRight />, method:() => editor.commands.addColumnAfter()},
+        {name:'colDel', icon:<RiDeleteColumn />, method:() => editor.commands.deleteColumn()},
+        {name:'rowTop', icon:<RiInsertRowTop />, method:() => editor.commands.addRowBefore()},
+        {name:'rowBot', icon:<RiInsertRowBottom />, method:() => editor.commands.addRowAfter()},
+        {name:'rowDel', icon:<RiDeleteRow />, method:() => editor.commands.deleteRow()},
+        {name:'cellMerge', icon:<RiLayout5Line />, method:() => editor.commands.mergeOrSplit()},
+        {name:'colHead', icon:<RiLayoutLeft2Line />, method:() => editor.commands.toggleHeaderColumn()},
+        {name:'rowHead', icon:<RiLayoutTop2Line />, method:() => editor.commands.toggleHeaderRow()},
+        {name:'deleteNote', icon:<RiDeleteBinLine />, method:() => {deleteHolder?updateDeleteHolder(''):updateDeleteHolder(title)}},
     ];
 
     const allToolbarMenu = allToolbarList.map(tool=> <ActionIcon

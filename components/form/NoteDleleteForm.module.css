@@ -1,0 +1,13 @@
+.NoteDeleteForm{
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+.CheckMessage{
+    margin-bottom: 18px;
+}
+
+.CheckMessage > span {
+    color: var(--color-accent-text-color);
+    font-weight: bold;
+}

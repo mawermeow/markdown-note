@@ -1,6 +1,6 @@
 import {FC, ChangeEvent } from 'react';
 import classes from "./InputItem.module.css";
-import {RiLock2Line,RiUserLine} from "react-icons/ri";
+import {RiLock2Line, RiPenNibLine, RiUserLine} from "react-icons/ri";
 
 type InputItemProps = {
     type:string,
@@ -21,6 +21,10 @@ const InputItem:FC<InputItemProps>=(props)=>{
 
     if(placeholder==='Username'){
         icon = <RiUserLine/>;
+    }
+
+    if(placeholder.includes('Title')||placeholder.includes('Note')){
+        icon = <RiPenNibLine/>;
     }
 
     const changeInputHandler=(event: ChangeEvent<HTMLInputElement>):void=>{

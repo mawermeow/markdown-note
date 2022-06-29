@@ -7,7 +7,7 @@ import {hashPassword} from "../../../lib/auth";
 const validUsername = 'mawer';
 const validPassword = '12345678';
 
-vi.mock("../../../lib/auth");
+vi.mock("../../../lib/form");
 
 let callInsertOne = false;
 

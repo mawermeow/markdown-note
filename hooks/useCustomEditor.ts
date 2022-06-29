@@ -13,19 +13,21 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import Blockquote from "@tiptap/extension-blockquote";
 import Code from "@tiptap/extension-code";
 import CodeBlock from "@tiptap/extension-code-block";
-import {Editor} from "@tiptap/core";
+import Image from '@tiptap/extension-image'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
+import HorizontalRule from '@tiptap/extension-horizontal-rule'
+import TextAlign from '@tiptap/extension-text-align'
 import useKeyPress from "./useKeyPress";
+import {hotKeyAddImage, hotKeyAddLink} from "../lib/editorLib";
 
-const createLink= (editor:Editor)=>{
-    navigator.clipboard.readText().then(text=>{
-        editor.commands.setLink({href:text});
-    })
-}
 
 const CustomBulletList = BulletList.extend({
     addKeyboardShortcuts() {
         return {
-            'Cmd-Alt-7': () => this.editor.commands.toggleBulletList(),
+            'Mod-Alt-7': () => this.editor.commands.toggleBulletList(),
         }
     },
 });
@@ -33,7 +35,7 @@ const CustomBulletList = BulletList.extend({
 const CustomOrderedList = OrderedList.extend({
     addKeyboardShortcuts() {
         return {
-            'Cmd-Alt-8': () => this.editor.commands.toggleOrderedList(),
+            'Mod-Alt-8': () => this.editor.commands.toggleOrderedList(),
         }
     },
 });
@@ -41,7 +43,7 @@ const CustomOrderedList = OrderedList.extend({
 const CustomBlockquote = Blockquote.extend({
     addKeyboardShortcuts() {
         return {
-            'Cmd-Alt-9': () => this.editor.commands.toggleBlockquote(),
+            'Mod-Alt-9': () => this.editor.commands.toggleBlockquote(),
         }
     },
 });
@@ -49,7 +51,7 @@ const CustomBlockquote = Blockquote.extend({
 const CustomTaskList = TaskList.extend({
     addKeyboardShortcuts() {
         return {
-            'Cmd-Alt-0': () => this.editor.commands.toggleTaskList(),
+            'Mod-Alt-o': () => this.editor.commands.toggleTaskList(),
         }
     },
 });
@@ -57,7 +59,7 @@ const CustomTaskList = TaskList.extend({
 const CustomCode = Code.extend({
     addKeyboardShortcuts() {
         return {
-            'Cmd-Alt-c': () => this.editor.commands.toggleCode(),
+            'Mod-Alt-c': () => this.editor.commands.toggleCode(),
         }
     },
 });
@@ -70,8 +72,16 @@ const CustomCodeBlock = CodeBlock.extend({
     },
 });
 
+const CustomHorizontalRule = HorizontalRule.extend({
+    addKeyboardShortcuts() {
+        return {
+            'Cmd-Alt-s': () => this.editor.commands.setHorizontalRule(),
+        }
+    },
+});
+
 const useCustomEditor = (title:string,content: string | {}) => {
-    const {setJournals}=useJournal();
+    const {updateContentToDB}=useJournal();
 
     const editor =  useEditor({
         extensions: [
@@ -81,6 +91,7 @@ const useCustomEditor = (title:string,content: string | {}) => {
                 orderedList: false,
                 code: false,
                 codeBlock: false,
+                horizontalRule:false,
             }),
             Highlight,
             Typography,
@@ -95,21 +106,37 @@ const useCustomEditor = (title:string,content: string | {}) => {
             CustomOrderedList,
             CustomTaskList,
             CustomCode,
-            CustomCodeBlock
+            CustomCodeBlock,
+            CustomHorizontalRule,
+            Image.configure({
+                inline: true,
+            }),
+            Table.configure({
+                resizable: true,
+            }),
+            TableRow,
+            TableHeader,
+            TableCell,
+            TextAlign.configure({
+                types: ['heading', 'paragraph'],
+            }),
         ],
         content: content,
-        onUpdate: ({editor}) => {
-            // send the content to an API here
-        },
-        onBlur:async ({editor})=>{
+        onBlur: async ({editor})=>{
             const json = editor.getJSON()
-            await setJournals({title, content:json});
+            await updateContentToDB({title, content:json});
         },
     });
 
     useKeyPress(['Meta', 'k'], (event:KeyboardEvent)=>{
         if(editor){
-            createLink(editor);
+            hotKeyAddLink(editor);
+        }
+    });
+
+    useKeyPress(['Meta', 'i'], (event:KeyboardEvent)=>{
+        if(editor){
+            hotKeyAddImage(editor);
         }
     });
 

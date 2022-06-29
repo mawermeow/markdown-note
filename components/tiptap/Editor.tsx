@@ -1,12 +1,12 @@
 import React from 'react';
-import FloatingList from "./FloatingList";
-import BubbleList from "./BubbleList";
 import classes from "./Editor.module.css";
-import Toolbar from "./Toolbar";
 import ActionBorder from "../ui/card/ActionBorder";
 import useCustomEditor from "../../hooks/useCustomEditor";
 import {EditorContent} from "@tiptap/react";
 import useUserHabits from "../../hooks/useUserHabits";
+import Toolbar from "./Toolbar";
+import FloatingList from "./FloatingList";
+import BubbleList from "./BubbleList";
 
 type EditorProps = {
     title:string,

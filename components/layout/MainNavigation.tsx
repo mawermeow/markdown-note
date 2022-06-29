@@ -19,15 +19,15 @@ const MainNavigation:FC=()=>{
 
         <nav className={classes.nav}>
             <ul className={classes.navNormal}>
+                {session && <li>
+                    <Link href="/notes"><a>
+                        <RiDraftLine/>
+                    </a></Link></li>}
                 <li>
                     <Link href="/auth"><a>
                         <RiUserLine/>
                     </a></Link>
                 </li>
-                {session && <li>
-                    <Link href="/notes"><a>
-                        <RiDraftLine/>
-                    </a></Link></li>}
                 <li>
                     <Link href="/directions"><a>
                         <Icon type='searchCircle'/>

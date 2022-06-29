@@ -1,14 +1,12 @@
 import {useContext, useState} from "react";
 import JournalContext from "../store/JournalContext";
-import {JournalData} from "../types/Journal";
 
 const useUserHabits=()=>{
     const {username, userToolbar, toggleTool, updateStatus,
-        isToolbarSetMode, toggleToolbarSetting} = useContext(JournalContext);
+        isToolbarSetMode, toggleToolbarSetting, transText, updateTransText} = useContext(JournalContext);
 
     const setToolbars = async ()=>{
         if(userToolbar){
-
             updateStatus({status:'pending',message:`Saving toolbar...`});
             const res = await fetch('/api/user/set-journals',{
                 method: 'PATCH',
@@ -21,7 +19,7 @@ const useUserHabits=()=>{
             if(!res.ok){
                 updateStatus({status:'error',message:data.message});
             }else{
-                updateStatus({status:'success',message:`Save toolbar successfully!`});
+                updateStatus({status:'success',message:'Save toolbar successfully!'});
             }
 
         }
@@ -36,7 +34,8 @@ const useUserHabits=()=>{
 
 
 
-    return {username, userToolbar, toggleTool, isToolbarSetMode, saveToolbarSetting, setToolbars};
+    return {username, userToolbar, toggleTool, isToolbarSetMode,
+        saveToolbarSetting, setToolbars, transText,updateTransText};
 };
 
 export default useUserHabits;

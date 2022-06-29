@@ -1,5 +1,5 @@
 import type {NextPage} from 'next';
-import EditorsCard from "../components/Markdown/EditorsCard";
+import EditorsCard from "../components/tiptap/EditorsCard";
 import {getSession, GetSessionOptions} from "next-auth/client";
 import {CustomGetServerSideProps} from "../types/CustomServerSideProps";
 import useJournal from "../hooks/useJournal";
@@ -24,7 +24,7 @@ export const getServerSideProps:CustomGetServerSideProps = async (context)=> {
     if(!session) {
         return{
             redirect:{
-                destination:'/auth', // 描述重新定向的位置
+                destination:'/form', // 描述重新定向的位置
                 permanent:false // 它是永久的還是只有一次
             }
         }

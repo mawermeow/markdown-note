@@ -1,8 +1,8 @@
 import {FC, ReactNode} from 'react';
-import TopBorder from "../ui/card/TopBorder";
-import TopButton from "../ui/card/TopButton";
+import TopBorder from "../ui/card/top/TopBorder";
+import TopButton from "../ui/card/top/TopButton";
 import MainBorder from "../ui/card/MainBorder";
-import Editor from "../Markdown/Editor";
+import Editor from "../tiptap/Editor";
 import ContentCard from "../ui/card/ContentCard";
 const directions = {
     "type": "doc",
@@ -12,7 +12,7 @@ const directions = {
             "content": [
                 {
                     "type": "text",
-                    "text": "Markdown shortcuts make it easy to format the text while typing."
+                    "text": "tiptap shortcuts make it easy to format the text while typing."
                 }
             ]
         },

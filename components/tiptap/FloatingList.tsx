@@ -2,10 +2,12 @@ import {FC} from 'react';
 import {FloatingMenu} from "@tiptap/react";
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./FloatingList.module.css";
+import useUserHabits from "../../hooks/useUserHabits";
 
 type Props = {editor:Editor}
 
 const FloatingList:FC<Props> = ({editor}) =>{
+    const { transText, updateTransText } = useUserHabits();
     
     if(!editor){return <span>Loading</span>}
 
@@ -29,6 +31,14 @@ const FloatingList:FC<Props> = ({editor}) =>{
             >
                 註解
             </button>
+            {transText && <button
+                onClick={() => {
+                    editor.chain().focus().insertContent(transText).run()
+                    updateTransText('');
+                }}
+            >
+                這裡
+            </button>}
         </FloatingMenu>
     </>
 };
