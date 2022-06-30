@@ -14,8 +14,9 @@ async function handler(req:NextApiRequest, res:NextApiResponse) {
 
         const journals = user.journals;
         const toolbars = user.toolbars;
+        const timestamp = user.timestamp;
 
-        res.status(200).json({ message: 'Take notes successfully.', journals, username, toolbars });
+        res.status(200).json({ message: 'Take notes successfully.', journals, username, toolbars, timestamp});
         await client.close();
     }
 }

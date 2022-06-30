@@ -11,18 +11,18 @@ async function handler(req:NextApiRequest, res:NextApiResponse) {
     if(isUser){
         const {client, usersCollection, user, username} = isUser;
 
-        const {newJournals, newToolbars} = req.body;
+        const {newJournals, newToolbars,timestamp} = req.body;
 
         if(newJournals){
             await usersCollection.updateOne(
                 {username:username},
-                {$set: {journals: newJournals}}
+                {$set: {journals: newJournals,timestamp}}
             );
         }
         if(newToolbars){
             await usersCollection.updateOne(
                 {username:username},
-                {$set: {toolbars: newToolbars}}
+                {$set: {toolbars: newToolbars,timestamp}}
             );
         }
 
