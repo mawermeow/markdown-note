@@ -4,6 +4,9 @@ import TopButton from "../ui/card/top/TopButton";
 import MainBorder from "../ui/card/MainBorder";
 import Editor from "../tiptap/Editor";
 import ContentCard from "../ui/card/ContentCard";
+import ToolbarSelectForm from "../form/ToolbarSelectForm";
+import NoteDeleteForm from "../form/NoteDeleteForm";
+
 const directions = {
     "type": "doc",
     "content": [
@@ -339,8 +342,10 @@ const Directions:FC = () =>{
 
         </TopBorder>
         <MainBorder isLeft={true} isVisible={true} isEditor={true}>
-            <Editor content={directions} title='test'/>
+            <Editor content={directions} title='Directions(?)'/>
         </MainBorder>
+        <NoteDeleteForm/>
+        <ToolbarSelectForm/>
     </ContentCard>
 };
 

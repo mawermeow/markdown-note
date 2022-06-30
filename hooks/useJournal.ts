@@ -5,7 +5,7 @@ import {getSession} from "next-auth/client";
 
 
 const useJournal=()=>{
-    const {journals, renderJournals, journalStatus, updateStatus, renderUsername,
+    const {journals, renderJournals, updateStatus,renderUsername,
         renderUserToolbar, deleteHolder, updateDeleteHolder} = useContext(JournalContext);
 
     const getUserData = async ()=>{
@@ -34,6 +34,7 @@ const useJournal=()=>{
     },[]);
 
     const fetchSetJournals=async (newJournals:JournalData[],title:string, action:string[])=>{
+
         updateStatus({status:'pending',message:`${action[0]} ${title}...`});
         const res = await fetch('/api/user/set-journals',{
             method: 'PATCH',
@@ -94,14 +95,12 @@ const useJournal=()=>{
     const delNoteToDB = async ()=>{
         if(journals && deleteHolder){
             const newJournals = journals.filter(journal=>journal.title!==deleteHolder);
-            // console.log('Deleted, now: ',newJournals);
             await fetchSetJournals(newJournals, deleteHolder, ['Deleting', 'Deleted']);
             updateDeleteHolder('');
         }
     };
 
-    return {journals, journalStatus,updateStatus, addNewNoteToDB,
-        updateContentToDB, delNoteToDB, updateTitleToDB, deleteHolder, updateDeleteHolder};
+    return {journals, addNewNoteToDB, updateContentToDB, delNoteToDB, updateTitleToDB};
 }
 
 export default useJournal;

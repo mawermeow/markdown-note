@@ -1,4 +1,4 @@
-import {FC, FormEvent, useState} from 'react';
+import {FC, FormEvent, useContext, useState} from 'react';
 import {signout} from "next-auth/client";
 import InputItem from "../ui/form/InputItem";
 import FetchStatus from "../ui/card/top/FetchStatus";
@@ -6,9 +6,8 @@ import TopButton from "../ui/card/top/TopButton";
 import ContentCard from "../ui/card/ContentCard";
 import TopBorder from "../ui/card/top/TopBorder";
 import MainBorder from "../ui/card/MainBorder";
-import useJournal from "../../hooks/useJournal";
-import useUserHabits from "../../hooks/useUserHabits";
 import MainFormBorder from "../ui/form/MainFormBorder";
+import JournalContext from "../../store/JournalContext";
 
 const changeUserPassword = async (oldPassword: string, newPassword: string) => {
     const response = await fetch('/api/user/change-password', {
@@ -30,9 +29,7 @@ const changeUserPassword = async (oldPassword: string, newPassword: string) => {
 const UserForm: FC = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
-
-    const {updateStatus} = useJournal();
-    const {username} = useUserHabits();
+    const {username,updateStatus} = useContext(JournalContext);
 
     const changePasswordHandler = async (event:FormEvent) => {
         event.preventDefault();
@@ -65,7 +62,10 @@ const UserForm: FC = () => {
                 </TopButton>
                 <TopButton
                     isActive={false}
-                    onClick={() => signout()}>
+                    onClick={() => {
+                        signout();
+                        localStorage.clear();
+                    }}>
                     Sign Out
                 </TopButton>
             </div>
@@ -89,31 +89,6 @@ const UserForm: FC = () => {
                     onChange={(input) => setNewPassword(input)}
                 />
             </MainFormBorder>
-        {/*<form onSubmit={changePasswordHandler}>*/}
-        {/*    <MainBorder isLeft={true} isVisible={true}>*/}
-        {/*        <div className={classes.loginFormInputItem}>*/}
-        {/*            <InputItem*/}
-        {/*                type='password'*/}
-        {/*                id='oldPassword'*/}
-        {/*                placeholder='Old Password'*/}
-        {/*                value={oldPassword}*/}
-        {/*                onChange={(input) => setOldPassword(input)}*/}
-        {/*            />*/}
-        {/*            <InputItem*/}
-        {/*                type='password'*/}
-        {/*                id='newPassword'*/}
-        {/*                placeholder='New Password'*/}
-        {/*                value={newPassword}*/}
-        {/*                onChange={(input) => setNewPassword(input)}*/}
-        {/*            />*/}
-        {/*        </div>*/}
-        {/*        <ActionBorder>*/}
-        {/*            <button className={classes.icon}>*/}
-        {/*                Change*/}
-        {/*            </button>*/}
-        {/*        </ActionBorder>*/}
-        {/*    </MainBorder>*/}
-        {/*</form>*/}
     </ContentCard></>
 };
 

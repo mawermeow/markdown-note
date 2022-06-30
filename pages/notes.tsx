@@ -24,7 +24,7 @@ export const getServerSideProps:CustomGetServerSideProps = async (context)=> {
     if(!session) {
         return{
             redirect:{
-                destination:'/form', // 描述重新定向的位置
+                destination:'/auth', // 描述重新定向的位置
                 permanent:false // 它是永久的還是只有一次
             }
         }

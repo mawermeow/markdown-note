@@ -1,13 +1,13 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
 import {FloatingMenu} from "@tiptap/react";
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./FloatingList.module.css";
-import useUserHabits from "../../hooks/useUserHabits";
+import JournalContext from "../../store/JournalContext";
 
 type Props = {editor:Editor}
 
 const FloatingList:FC<Props> = ({editor}) =>{
-    const { transText, updateTransText } = useUserHabits();
+    const { transText, updateTransText } = useContext(JournalContext);
     
     if(!editor){return <span>Loading</span>}
 

@@ -2,6 +2,8 @@ import React, {FC, useEffect, useState} from 'react';
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./Toolbar.module.css";
 import {addImage, addLink, clickAlignHandler} from "../../lib/editorLib";
+import JournalContext from "../../store/JournalContext";
+import {useContext} from "react";
 
 import {
     RiBold,
@@ -21,7 +23,6 @@ import {
     RiSettings3Line,
     RiSave3Line,
     RiImageLine,
-    RiTable2,
     RiLayoutGridLine,
     RiInsertColumnLeft,
     RiInsertColumnRight,
@@ -33,13 +34,13 @@ import {
     RiLayout5Line,
     RiLayoutLeft2Line,
     RiLayoutTop2Line,
-    RiAlignRight,
-    RiAlignCenter, RiAlignLeft, RiDeleteBinLine,
+    RiAlignCenter,
+    RiDeleteBinLine,
 } from 'react-icons/ri'
 import ActionIcon from "../ui/card/ActionIcon";
 import ActionDivider from "../ui/card/ActionDivider";
 import useJournal from "../../hooks/useJournal";
-import useUserHabits from "../../hooks/useUserHabits";
+import useToolbar from "../../hooks/useToolbar";
 
 type ToolBoxItem = {name:string, icon:JSX.Element, method:()=>void };
 
@@ -50,11 +51,9 @@ type ToolbarProps = {
 }
 
 const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
-
-    const {userToolbar, toggleTool, isToolbarSetMode, saveToolbarSetting} = useUserHabits();
-    const {updateContentToDB, updateDeleteHolder, deleteHolder} = useJournal();
-
-
+    const {updateToolbarMenu,toggleTool, deleteHolder, updateDeleteHolder} = useContext(JournalContext);
+    const {userToolbar, isToolbarSetMode, saveToolbarSetting} = useToolbar();
+    const {updateContentToDB} = useJournal();
 
     const allToolbarList:ToolBoxItem[] = [
         {name:'bold', icon:<RiBold />, method:() => editor.chain().focus().toggleBold().run()},
@@ -76,6 +75,7 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'undo', icon:<RiArrowGoBackLine />, method:() => editor.chain().focus().undo().run()},
         {name:'redo', icon:<RiArrowGoForwardLine />, method:() => editor.chain().focus().redo().run()},
         {name:'save', icon:<RiSave3Line />, method: async() => await updateContentToDB({title, content:editor.getJSON()})},
+        {name:'deleteNote', icon:<RiDeleteBinLine />, method:() => {deleteHolder?updateDeleteHolder(''):updateDeleteHolder(title)}},
         {name:'divider1', icon:<>|</>, method:()=>toggleTool('divider1')},
         {name:'table', icon:<RiLayoutGridLine />, method:() => editor.commands.insertTable({ rows: 3, cols: 3, withHeaderRow: true })},
         {name:'tableDel', icon:<RiLayoutGridFill />, method:() => editor.commands.deleteTable()},
@@ -88,7 +88,6 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'cellMerge', icon:<RiLayout5Line />, method:() => editor.commands.mergeOrSplit()},
         {name:'colHead', icon:<RiLayoutLeft2Line />, method:() => editor.commands.toggleHeaderColumn()},
         {name:'rowHead', icon:<RiLayoutTop2Line />, method:() => editor.commands.toggleHeaderRow()},
-        {name:'deleteNote', icon:<RiDeleteBinLine />, method:() => {deleteHolder?updateDeleteHolder(''):updateDeleteHolder(title)}},
     ];
 
     const allToolbarMenu = allToolbarList.map(tool=> <ActionIcon
@@ -112,6 +111,10 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
             }
         }
     })
+
+    useEffect(()=>{
+        updateToolbarMenu(allToolbarMenu);
+    },[userToolbar])
 
     if(!editor){return <span>Loading</span>}
 

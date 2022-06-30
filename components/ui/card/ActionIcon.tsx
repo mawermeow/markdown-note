@@ -1,6 +1,6 @@
 import React, {FC, ReactNode, useEffect, useState} from 'react';
 import classes from "./ActionIcon.module.css";
-import useUserHabits from "../../../hooks/useUserHabits";
+import useToolbar from "../../../hooks/useToolbar";
 
 type ActionIconProps = {
     children?: ReactNode,
@@ -12,7 +12,7 @@ type ActionIconProps = {
 const ActionIcon:FC<ActionIconProps> = (props) =>{
     const {children, onClick, value, canDisabled} = props;
     const [isUsed, setIsUsed] = useState(false);
-    const {userToolbar} = useUserHabits();
+    const {userToolbar} = useToolbar();
 
     useEffect(()=>{
         if(userToolbar && canDisabled){

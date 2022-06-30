@@ -1,20 +1,22 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
 import MainFormBorder from "../ui/form/MainFormBorder";
 import useJournal from "../../hooks/useJournal";
-import classes from "./NoteDleleteForm.module.css";
+import classes from "./NoteDeleteForm.module.css";
+import JournalContext from "../../store/JournalContext";
 
 const NoteDeleteForm:FC = () =>{
-    const {delNoteToDB, deleteHolder} = useJournal();
+    const {delNoteToDB} = useJournal();
+    const {deleteHolder} = useContext(JournalContext);
 
     const submitHandler= async ()=>{
         await delNoteToDB();
     };
 
-    return <div className={classes.NoteDeleteForm}>
+    return <div className={classes.noteDeleteForm}>
         <MainFormBorder isVisible={deleteHolder!==''} isLeft={false} onSubmit={submitHandler}
                         buttonValue='DELETE'
         >
-            <div className={classes.CheckMessage}>
+            <div className={classes.checkMessage}>
                 Do you really want to delete this note <span>{deleteHolder}</span>？
             </div>
 

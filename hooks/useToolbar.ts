@@ -1,9 +1,9 @@
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import JournalContext from "../store/JournalContext";
 
-const useUserHabits=()=>{
-    const {username, userToolbar, toggleTool, updateStatus,
-        isToolbarSetMode, toggleToolbarSetting, transText, updateTransText} = useContext(JournalContext);
+const useToolbar=()=>{
+    const {userToolbar, updateStatus,
+        isToolbarSetMode, toggleToolbarSetting} = useContext(JournalContext);
 
     const setToolbars = async ()=>{
         if(userToolbar){
@@ -26,16 +26,13 @@ const useUserHabits=()=>{
     };
 
     const saveToolbarSetting=async ()=>{
+        toggleToolbarSetting();
         if(isToolbarSetMode){
             await setToolbars()
         }
-        toggleToolbarSetting();
     };
 
-
-
-    return {username, userToolbar, toggleTool, isToolbarSetMode,
-        saveToolbarSetting, setToolbars, transText,updateTransText};
+    return {userToolbar, isToolbarSetMode, saveToolbarSetting, setToolbars};
 };
 
-export default useUserHabits;
+export default useToolbar;

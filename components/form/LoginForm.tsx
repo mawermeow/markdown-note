@@ -1,4 +1,4 @@
-import {FC, FormEvent, useState} from 'react';
+import {FC, FormEvent, useContext, useState} from 'react';
 import InputItem from "../ui/form/InputItem";
 import {signIn} from "next-auth/client";
 import {useRouter} from "next/router";
@@ -6,8 +6,8 @@ import FetchStatus from "../ui/card/top/FetchStatus";
 import ContentCard from "../ui/card/ContentCard";
 import TopButton from "../ui/card/top/TopButton";
 import TopBorder from "../ui/card/top/TopBorder";
-import useJournal from "../../hooks/useJournal";
 import MainFormBorder from "../ui/form/MainFormBorder";
+import JournalContext from "../../store/JournalContext";
 
 
 const createUser=async (username:string, password:string)=>{
@@ -33,7 +33,7 @@ const LoginForm: FC = () => {
     const [password, setPassword] = useState('');
     const [isLoginMode, setIsLoginMode] = useState(true);
     const router = useRouter();
-    const {updateStatus} = useJournal()
+    const {updateStatus} = useContext(JournalContext);
 
     const loginHandler = async () => {
         updateStatus({status:'pending',message:'Logging in...'});

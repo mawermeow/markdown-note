@@ -1,11 +1,11 @@
-import {FC, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import classes from "./FetchStatus.module.css";
-import useJournal from "../../../../hooks/useJournal";
+import JournalContext from "../../../../store/JournalContext";
 
 
 
 const FetchStatus:FC = () =>{
-    const {journalStatus} = useJournal();
+    const {journalStatus} = useContext(JournalContext);
 
     return <>
         <span className={

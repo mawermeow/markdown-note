@@ -18,24 +18,24 @@ const Hello: FC = () => {
             </div>
             <section>
                 <Directions/>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad
-                    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe
-                    dolor inventore itaque. Quae.</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad
-                    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe
-                    dolor inventore itaque. Quae.</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad
-                    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe
-                    dolor inventore itaque. Quae.</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad
-                    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe
-                    dolor inventore itaque. Quae.</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad
-                    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe
-                    dolor inventore itaque. Quae.</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad
-                    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe
-                    dolor inventore itaque. Quae.</p>
+                {/*<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad*/}
+                {/*    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe*/}
+                {/*    dolor inventore itaque. Quae.</p>*/}
+                {/*<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad*/}
+                {/*    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe*/}
+                {/*    dolor inventore itaque. Quae.</p>*/}
+                {/*<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad*/}
+                {/*    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe*/}
+                {/*    dolor inventore itaque. Quae.</p>*/}
+                {/*<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad*/}
+                {/*    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe*/}
+                {/*    dolor inventore itaque. Quae.</p>*/}
+                {/*<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad*/}
+                {/*    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe*/}
+                {/*    dolor inventore itaque. Quae.</p>*/}
+                {/*<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic asperiores, debitis ullam quibusdam ad*/}
+                {/*    expedita cumque voluptatem similique excepturi suscipit harum aliquid temporibus totam labore saepe*/}
+                {/*    dolor inventore itaque. Quae.</p>*/}
 
             </section>
 

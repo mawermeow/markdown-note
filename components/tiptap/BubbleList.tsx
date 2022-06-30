@@ -1,16 +1,16 @@
-import {FC, FormEvent, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {BubbleMenu} from "@tiptap/react";
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./BubbleList.module.css";
 import {RiAlignCenter, RiDragMove2Fill, RiPencilLine} from "react-icons/ri";
-import useUserHabits from "../../hooks/useUserHabits";
 import {clickAlignHandler} from "../../lib/editorLib";
+import JournalContext from "../../store/JournalContext";
 
 
 type BubbleListProps = { editor: Editor };
 
 const BubbleList: FC<BubbleListProps> = ({editor}) => {
-        const {updateTransText} = useUserHabits();
+        const {updateTransText} = useContext(JournalContext);
 
         const [color, setColor] = useState('#000000');
 
@@ -64,13 +64,6 @@ const BubbleList: FC<BubbleListProps> = ({editor}) => {
                 >
                     <RiAlignCenter/>
                 </div>
-
-                {/*<div*/}
-                {/*    className={classes.icon}*/}
-                {/*    onClick={()=>editor.chain().focus().selectParentNode().run()}*/}
-                {/*>*/}
-                {/*    <RiDragMove2Fill/>*/}
-                {/*</div>*/}
 
                 <button
                     onClick={transferNotes}

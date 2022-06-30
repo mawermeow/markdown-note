@@ -8,6 +8,7 @@ import NoteTitleForm from "../form/NoteTitleForm";
 import {JournalData} from "../../types/Journal";
 import Editor from "./Editor";
 import NoteDeleteForm from "../form/NoteDeleteForm";
+import ToolbarSelectForm from "../form/ToolbarSelectForm";
 
 
 type LogProps = { title: string, content: string | {} };
@@ -95,6 +96,7 @@ const EditorsCard: FC<MarkdownCardProps> = ({contents}) => {
         </TopBorder>
         {editorList}
         <NoteDeleteForm/>
+        <ToolbarSelectForm/>
     </ContentCard>
 }
 

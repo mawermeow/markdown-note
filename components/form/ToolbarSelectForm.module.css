@@ -1,0 +1,6 @@
+.toolbarSelectForm{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 4px 12px;
+}

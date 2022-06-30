@@ -1,13 +1,13 @@
-.NoteDeleteForm{
+.noteDeleteForm{
     margin-top:20px;
     margin-bottom: 20px;
 }
 
-.CheckMessage{
+.checkMessage{
     margin-bottom: 18px;
 }
 
-.CheckMessage > span {
+.checkMessage > span {
     color: var(--color-accent-text-color);
     font-weight: bold;
 }
