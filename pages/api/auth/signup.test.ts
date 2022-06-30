@@ -11,6 +11,13 @@ vi.mock("../../../lib/form");
 
 let callInsertOne = false;
 
+
+vi.mock("../../../lib/auth",()=>{
+    return {
+        hashPassword: vi.fn(),
+    }
+});
+
 vi.mock('../../../lib/database', () => {
     return {
         connectToDatabase: vi.fn(() => ({

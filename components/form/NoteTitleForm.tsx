@@ -19,12 +19,14 @@ const NoteTitleForm:FC<NoteTitleForm> = (props) =>{
 
     const submitHandler= async (event:FormEvent)=>{
         event.preventDefault();
+        onClose(newTitleInput);
+
         if(journalData){
             await updateTitleToDB(journalData.title,newTitleInput);
         }else{
             await addNewNoteToDB(newTitleInput);
         }
-        onClose(newTitleInput);
+
         setNewTitleInput('');
     };
 

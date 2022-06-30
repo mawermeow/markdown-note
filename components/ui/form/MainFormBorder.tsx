@@ -20,7 +20,7 @@ const MainFormBorder:FC<MainFormBorderProps> = (props) =>{
                 <div className={classes.loginFormInputItem}>
                     {children}
                 </div>
-                <ActionBorder>
+                <ActionBorder notSticky={true}>
                     <button className={classes.icon}>
                         {buttonValue}
                     </button>

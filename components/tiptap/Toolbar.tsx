@@ -35,7 +35,7 @@ import {
     RiLayoutLeft2Line,
     RiLayoutTop2Line,
     RiAlignCenter,
-    RiDeleteBinLine,
+    RiDeleteBinLine, RiIndentDecrease, RiIndentIncrease,
 } from 'react-icons/ri'
 import ActionIcon from "../ui/card/ActionIcon";
 import ActionDivider from "../ui/card/ActionDivider";
@@ -61,7 +61,7 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'strike', icon:<RiStrikethrough />, method:() => editor.chain().focus().toggleStrike().run()},
         {name:'clear', icon:<RiFormatClear />, method:() => editor.chain().focus().unsetAllMarks().clearNodes().run()},
         {name:'alignCenter', icon:<RiAlignCenter />, method:() => clickAlignHandler(editor)},
-        {name:'divider3', icon:<>|</>, method:()=>toggleTool('divider3')},
+        {name:'divider1', icon:<>|</>, method:()=>toggleTool('divider1')},
         {name:'blockQuote', icon:<RiDoubleQuotesL />, method:() => editor.chain().focus().toggleBlockquote().run()},
         {name:'orderedList', icon:<RiListOrdered />, method:()=>editor.chain().focus().toggleOrderedList().run()},
         {name:'bulletList', icon:<RiListUnordered />, method:() => editor.chain().focus().toggleBulletList().run()},
@@ -76,7 +76,7 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'redo', icon:<RiArrowGoForwardLine />, method:() => editor.chain().focus().redo().run()},
         {name:'save', icon:<RiSave3Line />, method: async() => await updateContentToDB({title, content:editor.getJSON()})},
         {name:'deleteNote', icon:<RiDeleteBinLine />, method:() => {deleteHolder?updateDeleteHolder(''):updateDeleteHolder(title)}},
-        {name:'divider1', icon:<>|</>, method:()=>toggleTool('divider1')},
+        {name:'divider3', icon:<>|</>, method:()=>toggleTool('divider3')},
         {name:'table', icon:<RiLayoutGridLine />, method:() => editor.commands.insertTable({ rows: 3, cols: 3, withHeaderRow: true })},
         {name:'tableDel', icon:<RiLayoutGridFill />, method:() => editor.commands.deleteTable()},
         {name:'colLeft', icon:<RiInsertColumnLeft />, method:() => editor.commands.addColumnBefore()},
@@ -88,6 +88,8 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'cellMerge', icon:<RiLayout5Line />, method:() => editor.commands.mergeOrSplit()},
         {name:'colHead', icon:<RiLayoutLeft2Line />, method:() => editor.commands.toggleHeaderColumn()},
         {name:'rowHead', icon:<RiLayoutTop2Line />, method:() => editor.commands.toggleHeaderRow()},
+        {name:'tab', icon:<RiIndentIncrease />, method:() => editor.commands.sinkListItem('listItem')},
+        {name:'shiftTab', icon:<RiIndentDecrease />, method:() => editor.commands.liftListItem('listItem')},
     ];
 
     const allToolbarMenu = allToolbarList.map(tool=> <ActionIcon
@@ -110,7 +112,7 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
                                                    onClick={() => toggleTool(name)}/>)
             }
         }
-    })
+    });
 
     useEffect(()=>{
         updateToolbarMenu(allToolbarMenu);

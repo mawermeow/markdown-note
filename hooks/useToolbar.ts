@@ -11,7 +11,7 @@ const useToolbar=()=>{
             updateStatus({status:'pending',message:`Saving toolbar...`});
 
             const timestamp = getTimestamp();
-            localStorage.setItem('journals',JSON.stringify(userToolbar));
+            localStorage.setItem('toolbars',JSON.stringify(userToolbar));
 
             const res = await fetch('/api/user/set-journals',{
                 method: 'PATCH',

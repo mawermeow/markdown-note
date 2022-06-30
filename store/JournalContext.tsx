@@ -6,6 +6,8 @@ interface JournalContextInterface {
     renderJournals: (newJournals: JournalData[]) => void,
     journalStatus: JournalStatus,
     updateStatus: (newStatus: JournalStatus) => void,
+    showStatusMessage:boolean,
+    toggleShowStatusMessage:()=>void,
     username: string,
     renderUsername: (journalOwner: string) => void,
     userToolbar: string[],
@@ -26,6 +28,8 @@ const JournalContext = createContext<JournalContextInterface>({
     renderJournals:(newJournals)=>{},
     journalStatus:{status:'',message:''},
     updateStatus:(newStatus)=>{},
+    showStatusMessage:true,
+    toggleShowStatusMessage:()=>{},
     username:'',
     renderUsername:(journalOwner)=>{},
     userToolbar:[],
@@ -57,6 +61,11 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
     const [journalStatus, setJournalStatus] = useState(journalStatusInit);
     const updateStatus=(newStatus:JournalStatus)=>{
         setJournalStatus(newStatus);
+    };
+
+    const [showStatusMessage,setShowStatusMessage]=useState(true);
+    const toggleShowStatusMessage=()=>{
+        setShowStatusMessage(prev=>!prev);
     };
 
     const [username,setUsername]=useState('');
@@ -112,6 +121,8 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
         renderJournals,
         journalStatus,
         updateStatus,
+        showStatusMessage,
+        toggleShowStatusMessage,
         username,
         renderUsername,
         userToolbar,

@@ -11,6 +11,21 @@ const useJournal=()=>{
 
     const getUserData = async ()=>{
         updateStatus({status:'pending',message:'Getting notes...'});
+
+        const localTimestamp = localStorage.getItem('timestamp');
+        const localJournals = localStorage.getItem('journals');
+        const localUsername = localStorage.getItem('username');
+        const localToolbars = localStorage.getItem('toolbars');
+
+        if(localTimestamp) {
+            if (localJournals && localUsername && localToolbars) {
+                renderJournals(JSON.parse(localJournals));
+                renderUsername(JSON.parse(localUsername));
+                renderUserToolbar(JSON.parse(localToolbars));
+                updateStatus({status: 'success', message: 'Successfully get local notes'});
+            }
+        }
+
         const res = await fetch('/api/user/get-journals');
         const data = await res.json();
 
@@ -19,31 +34,30 @@ const useJournal=()=>{
             return;
         }
 
-        const localTimestamp = localStorage.getItem('timestamp');
+        if(localTimestamp && data.timestamp === JSON.parse(localTimestamp)){
+            const timestamp = getTimestamp();
 
-        if(!localTimestamp){
+            const res = await fetch('/api/user/set-journals',{
+                method: 'PATCH',
+                body: JSON.stringify({newJournals:localJournals,timestamp}),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if(res.ok){
+                updateStatus({status:'success',message:'Saved notes successfully'});
+            }
+        }else{
             renderJournals(data.journals);
             renderUsername(data.username);
             renderUserToolbar(data.toolbars);
             localStorage.setItem('journals',JSON.stringify(data.journals));
             localStorage.setItem('username',JSON.stringify(data.username));
             localStorage.setItem('toolbars',JSON.stringify(data.toolbars));
+            localStorage.setItem('timestamp',JSON.stringify(localTimestamp));
             updateStatus({status:'success',message:'Take notes successfully'});
-        }else if(localTimestamp && parseInt(localTimestamp) === data.timestamp ){
-            const localJournals = localStorage.getItem('journals');
-            const localUsername = localStorage.getItem('username');
-            const localToolbars = localStorage.getItem('toolbars');
-
-            if(localJournals&& localUsername && localToolbars){
-                renderJournals(JSON.parse(localJournals));
-                renderUsername(JSON.parse(localUsername));
-                renderUserToolbar(JSON.parse(localToolbars));
-                updateStatus({status:'success',message:'Take local notes successfully'});
-            }
         }
-
-
-    };
+    }
 
     useEffect(()=>{
         getSession().then(session=>{
@@ -61,6 +75,7 @@ const useJournal=()=>{
 
         const timestamp = getTimestamp();
         localStorage.setItem('journals',JSON.stringify(newJournals));
+        renderJournals(newJournals);
 
         const res = await fetch('/api/user/set-journals',{
             method: 'PATCH',
@@ -74,7 +89,6 @@ const useJournal=()=>{
         if(!res.ok){
             updateStatus({status:'error',message:`${action[0]} error, ${title} saved locally`});
         }else{
-            renderJournals(newJournals);
             localStorage.setItem('timestamp',timestamp.toString());
             updateStatus({status:'success',message:`${action[1]} ${title} successfully!`});
         }
@@ -131,4 +145,3 @@ const useJournal=()=>{
 }
 
 export default useJournal;
-

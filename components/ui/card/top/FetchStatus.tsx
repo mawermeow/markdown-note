@@ -5,16 +5,16 @@ import JournalContext from "../../../../store/JournalContext";
 
 
 const FetchStatus:FC = () =>{
-    const {journalStatus} = useContext(JournalContext);
+    const {journalStatus, showStatusMessage,toggleShowStatusMessage} = useContext(JournalContext);
 
     return <>
-        <span className={
+        <span onClick={()=>toggleShowStatusMessage()} className={
             `${classes.editorStatus} ${
                 journalStatus.status==='pending'?classes.editorStatusPending
                     :journalStatus.status==='success'?classes.editorStatusSuccess
                         :journalStatus.status==='error'?classes.editorStatusError
                             :''}`}>
-                {journalStatus.message}</span>
+                {showStatusMessage && journalStatus.message}</span>
     </>
 };
 

@@ -1,4 +1,4 @@
-import {FC, useContext} from 'react';
+import {FC, FormEvent, useContext} from 'react';
 import MainFormBorder from "../ui/form/MainFormBorder";
 import useJournal from "../../hooks/useJournal";
 import classes from "./NoteDeleteForm.module.css";
@@ -8,7 +8,8 @@ const NoteDeleteForm:FC = () =>{
     const {delNoteToDB} = useJournal();
     const {deleteHolder} = useContext(JournalContext);
 
-    const submitHandler= async ()=>{
+    const submitHandler= async (event:FormEvent)=>{
+        event.preventDefault();
         await delNoteToDB();
     };
 
