@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {getSession} from "next-auth/client";
 import UserForm from "../components/form/UserForm";
 import Loading from "../components/ui/loading/Loading";
+import Head from "next/head";
 
 const AuthPage: NextPage = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +28,13 @@ const AuthPage: NextPage = () => {
     if(isLogin){
         return <UserForm/>
     }
-    return <LoginForm/>;
+    return <>
+        <Head>
+            <title>登入頁面 - 雪球筆記</title>
+            <meta name="description" content="準備好一起讓生活質量越滾越高吧！"/>
+        </Head>
+        <LoginForm/>
+    </>;
 }
 
 export default AuthPage

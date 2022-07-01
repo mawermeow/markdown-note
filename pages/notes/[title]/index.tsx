@@ -15,7 +15,7 @@ const NotePage = () => {
     const {username} = useContext(JournalContext);
 
     const head = <Head>
-        <title>{noteTitle} - SnowBall Note</title>
+        <title>{noteTitle} - 雪球筆記</title>
         <meta name="description" content={`${username}的筆記`}/>
     </Head>
 

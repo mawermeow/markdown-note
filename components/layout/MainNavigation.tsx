@@ -27,11 +27,6 @@ const MainNavigation:FC=()=>{
                         <RiUserLine/>
                     </a></Link>
                 </li>
-                {/*<li>*/}
-                {/*    <Link href="/directions"><a>*/}
-                {/*        <Icon type='searchCircle'/>*/}
-                {/*    </a></Link>*/}
-                {/*</li>*/}
             </ul>
             <ul className={classes.navSmall}>
                 <li>
