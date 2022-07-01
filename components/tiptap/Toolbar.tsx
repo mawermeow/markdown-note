@@ -35,14 +35,13 @@ import {
     RiLayoutLeft2Line,
     RiLayoutTop2Line,
     RiAlignCenter,
-    RiDeleteBinLine, RiIndentDecrease, RiIndentIncrease,
+    RiDeleteBinLine, RiIndentDecrease, RiIndentIncrease, RiAlignLeft, RiAlignRight, RiFileList2Line,
 } from 'react-icons/ri'
 import ActionIcon from "../ui/card/ActionIcon";
 import ActionDivider from "../ui/card/ActionDivider";
 import useJournal from "../../hooks/useJournal";
 import useToolbar from "../../hooks/useToolbar";
-
-type ToolBoxItem = {name:string, icon:JSX.Element, method:()=>void };
+import {ToolBoxItem} from "../../types/Journal";
 
 type ToolbarProps = {
     title:string,
@@ -60,7 +59,9 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'italic', icon:<RiItalic />, method:() => editor.chain().focus().toggleItalic().run()},
         {name:'strike', icon:<RiStrikethrough />, method:() => editor.chain().focus().toggleStrike().run()},
         {name:'clear', icon:<RiFormatClear />, method:() => editor.chain().focus().unsetAllMarks().clearNodes().run()},
-        {name:'alignCenter', icon:<RiAlignCenter />, method:() => clickAlignHandler(editor)},
+        {name:'alignLeft', icon:<RiAlignLeft />, method:() => editor.commands.setTextAlign('left')},
+        {name:'alignCenter', icon:<RiAlignCenter />, method:() => editor.commands.setTextAlign('center')},
+        {name:'alignRight', icon:<RiAlignRight />, method:() => editor.commands.setTextAlign('right')},
         {name:'divider1', icon:<>|</>, method:()=>toggleTool('divider1')},
         {name:'blockQuote', icon:<RiDoubleQuotesL />, method:() => editor.chain().focus().toggleBlockquote().run()},
         {name:'orderedList', icon:<RiListOrdered />, method:()=>editor.chain().focus().toggleOrderedList().run()},
@@ -90,6 +91,7 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'rowHead', icon:<RiLayoutTop2Line />, method:() => editor.commands.toggleHeaderRow()},
         {name:'tab', icon:<RiIndentIncrease />, method:() => editor.commands.sinkListItem('listItem')},
         {name:'shiftTab', icon:<RiIndentDecrease />, method:() => editor.commands.liftListItem('listItem')},
+        {name:'console.log(json)', icon:<RiFileList2Line />, method:() => console.log(editor.getJSON())},
     ];
 
     const allToolbarMenu = allToolbarList.map(tool=> <ActionIcon
@@ -115,7 +117,7 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
     });
 
     useEffect(()=>{
-        updateToolbarMenu(allToolbarMenu);
+        updateToolbarMenu(allToolbarList);
     },[userToolbar])
 
     if(!editor){return <span>Loading</span>}
@@ -130,7 +132,7 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
             {customToolbarMenu}
             <ActionIcon value={<RiSettings3Line/>} onClick={saveToolbarSetting}/>
         </>}
-        { setComponent && isToolbarSetMode && allToolbarMenu }
+        {/*{ setComponent && isToolbarSetMode && allToolbarMenu }*/}
     </div>
     </>
 };

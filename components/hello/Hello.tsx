@@ -13,7 +13,7 @@ const Hello: FC = () => {
                        height={660}
                       className={classes.background}/>
                 <div className={classes.floatAnimation}>
-                    <h1>Bullet Note</h1>
+                    <h1>雪球筆記</h1>
                 </div>
             </div>
             <section>

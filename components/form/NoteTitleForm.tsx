@@ -3,6 +3,7 @@ import MainFormBorder from "../ui/form/MainFormBorder";
 import InputItem from "../ui/form/InputItem";
 import useJournal from "../../hooks/useJournal";
 import {JournalData} from "../../types/Journal";
+import {useRouter} from "next/router";
 
 type NoteTitleForm = {
     onClose:(newTitle:string)=>void,
@@ -14,6 +15,7 @@ const NoteTitleForm:FC<NoteTitleForm> = (props) =>{
     const {isVisible, onClose, journalData} = props;
     const [newTitleInput, setNewTitleInput]= useState('');
     const {updateTitleToDB, addNewNoteToDB} = useJournal();
+    const router = useRouter();
 
     const placeholder = `${journalData? 'New Title':'New Note'}`
 
@@ -27,6 +29,7 @@ const NoteTitleForm:FC<NoteTitleForm> = (props) =>{
             await addNewNoteToDB(newTitleInput);
         }
 
+        await router.replace(`/notes/${newTitleInput}`);
         setNewTitleInput('');
     };
 

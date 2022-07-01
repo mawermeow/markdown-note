@@ -1,11 +1,11 @@
 import {createContext, Dispatch, FC, ReactNode, SetStateAction, useEffect, useState} from "react";
-import {JournalData, JournalStatus} from "../types/Journal";
+import {JournalData, JournalStatus, ToolBoxItem} from "../types/Journal";
 
 interface JournalContextInterface {
     journals: JournalData[] | undefined,
     renderJournals: (newJournals: JournalData[]) => void,
-    journalStatus: JournalStatus,
-    updateStatus: (newStatus: JournalStatus) => void,
+    journalStatus: JournalStatus|undefined,
+    updateStatus: (newStatus: JournalStatus|undefined) => void,
     showStatusMessage:boolean,
     toggleShowStatusMessage:()=>void,
     username: string,
@@ -19,14 +19,16 @@ interface JournalContextInterface {
     updateTransText:(newTransText:string)=>void,
     deleteHolder:string,
     updateDeleteHolder:(deleteTitle:string)=>void,
-    toolbarMenu:JSX.Element[],
-    updateToolbarMenu:(newMenu:JSX.Element[])=>void,
+    toolbarMenu:ToolBoxItem[],
+    updateToolbarMenu:(newMenu:ToolBoxItem[])=>void,
+    // toolbarMenu:JSX.Element[],
+    // updateToolbarMenu:(newMenu:JSX.Element[])=>void,
 }
 
 const JournalContext = createContext<JournalContextInterface>({
     journals:undefined,
     renderJournals:(newJournals)=>{},
-    journalStatus:{status:'',message:''},
+    journalStatus:undefined,
     updateStatus:(newStatus)=>{},
     showStatusMessage:true,
     toggleShowStatusMessage:()=>{},
@@ -41,8 +43,8 @@ const JournalContext = createContext<JournalContextInterface>({
     updateTransText:(newTransText:string)=>{},
     deleteHolder:'',
     updateDeleteHolder:()=>{},
-    toolbarMenu:[<></>],
-    updateToolbarMenu:(newMenu:JSX.Element[])=>{},
+    toolbarMenu:[],
+    updateToolbarMenu:(newMenu:ToolBoxItem[])=>{},
 });
 
 type JournalContextProviderProps={
@@ -50,20 +52,18 @@ type JournalContextProviderProps={
 }
 
 export const JournalContextProvider:FC<JournalContextProviderProps> = (props) => {
-    let journalsInit:JournalData[]|undefined;
 
-    const [journals, setJournals] = useState(journalsInit);
+    const [journals, setJournals] = useState<JournalData[]|undefined>();
     const renderJournals=(newJournals:JournalData[])=>{
         setJournals(newJournals);
     };
 
-    const journalStatusInit = {status:'',message:''};
-    const [journalStatus, setJournalStatus] = useState(journalStatusInit);
-    const updateStatus=(newStatus:JournalStatus)=>{
+    const [journalStatus, setJournalStatus] = useState<JournalStatus|undefined>();
+    const updateStatus=(newStatus:JournalStatus|undefined)=>{
         setJournalStatus(newStatus);
     };
 
-    const [showStatusMessage,setShowStatusMessage]=useState(true);
+    const [showStatusMessage,setShowStatusMessage]=useState(false);
     const toggleShowStatusMessage=()=>{
         setShowStatusMessage(prev=>!prev);
     };
@@ -90,8 +90,8 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
         setIsToolbarSetMode(prev=>!prev);
     };
 
-    const [toolbarMenu, setToolbarMenu] = useState([<></>]);
-    const updateToolbarMenu=(newMenu:JSX.Element[])=>{
+    const [toolbarMenu, setToolbarMenu] = useState<ToolBoxItem[]>([]);
+    const updateToolbarMenu=(newMenu:ToolBoxItem[])=>{
         setToolbarMenu(newMenu);
     };
 
@@ -106,9 +106,9 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
     };
 
     useEffect(() => {
-        if (journalStatus.status === 'success' ||journalStatus.status === 'error') {
+        if (journalStatus && (journalStatus.status === 'success' || journalStatus.status === 'error')) {
             const timer = setTimeout(() => {
-                setJournalStatus(journalStatusInit);
+                setJournalStatus({status:'',message:''});
             }, 3000)
             return () => {
                 clearTimeout(timer);

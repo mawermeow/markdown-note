@@ -9,47 +9,38 @@ import {JournalData} from "../../types/Journal";
 import Editor from "./Editor";
 import NoteDeleteForm from "../form/NoteDeleteForm";
 import ToolbarSelectForm from "../form/ToolbarSelectForm";
+import {useRouter} from "next/router";
+import TopButtonDiv from "../ui/card/top/TopButtonDiv";
 
 
 type LogProps = { title: string, content: string | {} };
-type MarkdownCardProps = { contents: LogProps[] };
+type MarkdownCardProps = {
+    contents: LogProps[],
+    readTag?:string,
+};
 
+const EditorsCard: FC<MarkdownCardProps> = (props) => {
+    const {contents, readTag} = props;
+    const tagList = contents.map(content=> content.title);
+    const [tag, setTag] = useState(readTag||tagList[0]);
+    const router = useRouter();
 
-const EditorsCard: FC<MarkdownCardProps> = ({contents}) => {
-    const [isLeftLog, setIsLeftLog] = useState(true);
-    const [tag, setTag] = useState('Daily');
+    const [titleFormContent,setTitleFormContent] = useState<JournalData|undefined>();
+    const [titleFormVisible, setTitleFormVisible] = useState(false);
 
-    const [isNoteFormVisible, setIsNoteFormVisible] = useState(false);
-    let wantEditNoteInit:JournalData|undefined;
-    const [wantEditNote,setWantEditNote] = useState(wantEditNoteInit);
-
-
-    let firstButton = true;
 
     const topButtonList = contents.map(content => {
         const value = content.title;
+
         let onClickHandler = () => {
             if(tag === value){
-                setWantEditNote(content);
-                setIsNoteFormVisible(prev => !prev);
+                setTitleFormContent(content);
+                setTitleFormVisible(prev => !prev);
             }
             setTag(value);
-            setWantEditNote(content);
-            setIsLeftLog(false);
+            setTitleFormContent(content);
+            router.replace(`/notes/${value}`);
         };
-        if(firstButton){
-            onClickHandler = () => {
-                if(tag === value){
-                    setWantEditNote(content);
-                    setIsNoteFormVisible(prev => !prev);
-                }
-                setTag(value);
-                setWantEditNote(content);
-                setIsLeftLog(true);
-            };
-        }
-
-        firstButton = false;
 
         return <TopButton
             key={value}
@@ -60,11 +51,10 @@ const EditorsCard: FC<MarkdownCardProps> = ({contents}) => {
 
     const editorList = contents.map(content => {
         return <MainBorder
-            isLeft={isLeftLog}
             key={content.title}
+            isLeft={tag===tagList[0]}
             isEditor={true}
             isVisible={tag === content.title}>
-
             <Editor
                 key={content.title}
                 title={content.title}
@@ -74,24 +64,24 @@ const EditorsCard: FC<MarkdownCardProps> = ({contents}) => {
     });
 
     return <ContentCard>
-        <NoteTitleForm isVisible={isNoteFormVisible} journalData={wantEditNote}
+        <NoteTitleForm isVisible={titleFormVisible} journalData={titleFormContent}
                        onClose={(newTitleInput)=> {
                            setTag(newTitleInput);
-                           setIsNoteFormVisible(false)
+                           setTitleFormVisible(false)
                        }} />
         <TopBorder>
-            <div>
+            <TopButtonDiv>
                 {topButtonList}
                 <TopButton isActive={false} onClick={()=> {
-                    if(wantEditNote && isNoteFormVisible){
-                        setWantEditNote(undefined);
+                    if(titleFormContent && titleFormVisible){
+                        setTitleFormContent(undefined);
                     }else{
-                        setWantEditNote(undefined);
-                        setIsNoteFormVisible(prev => !prev);
+                        setTitleFormContent(undefined);
+                        setTitleFormVisible(prev => !prev);
                     }
                 }
                 }>+</TopButton>
-            </div>
+            </TopButtonDiv>
             <FetchStatus/>
         </TopBorder>
         {editorList}

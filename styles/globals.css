@@ -231,6 +231,7 @@ button {
   /*background-color: rgba(97,97,97, 0.1);*/
   color: var(--color-title-text-color);
   border: 1px solid var(--color-separator-color);
+  padding: 1px 2px;
 }
 
 .ProseMirror pre {
@@ -238,7 +239,8 @@ button {
   color: #FFF;
   font-family: 'JetBrainsMono', monospace;
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;}
+  border-radius: 0.5rem;
+}
 
 .ProseMirror pre code {
   color: inherit;

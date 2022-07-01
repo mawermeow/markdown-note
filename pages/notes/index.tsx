@@ -1,17 +1,17 @@
 import type {NextPage} from 'next';
-import EditorsCard from "../components/tiptap/EditorsCard";
+import EditorsCard from "../../components/tiptap/EditorsCard";
 import {getSession, GetSessionOptions} from "next-auth/client";
-import {CustomGetServerSideProps} from "../types/CustomServerSideProps";
-import useJournal from "../hooks/useJournal";
-import Loading from "../components/ui/loading/Loading";
+import {CustomGetServerSideProps} from "../../types/CustomServerSideProps";
+import useJournal from "../../hooks/useJournal";
+import Loading from "../../components/ui/loading/Loading";
 
 const NotesPage: NextPage =  () => {
-
     const {journals} = useJournal();
 
     if(!journals){
         return <Loading/>;
     }
+
     return <EditorsCard contents={journals}/>;
 }
 export default NotesPage;

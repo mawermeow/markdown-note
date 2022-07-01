@@ -10,13 +10,13 @@ import BubbleList from "./BubbleList";
 type EditorProps = {
     title:string,
     content:string|{},
-    isVisible?:boolean,
-    isLeftLog?:boolean,
+    notSave?:boolean,
 }
 
-const Editor: React.FC<EditorProps> = ({title,content,isVisible=true,isLeftLog}) => {
+const Editor: React.FC<EditorProps> = (props) => {
+    const {title,content,notSave} = props;
 
-    const editor = useCustomEditor(title,content);
+    const editor = useCustomEditor(title,content, notSave);
 
     return (
         <>

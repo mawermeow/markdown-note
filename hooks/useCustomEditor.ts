@@ -80,7 +80,11 @@ const CustomHorizontalRule = HorizontalRule.extend({
     },
 });
 
-const useCustomEditor = (title:string,content: string | {}) => {
+const useCustomEditor = (
+    title:string,
+    content:{}|string,
+    notSave?:boolean
+) => {
     const {updateContentToDB}=useJournal();
 
     const editor =  useEditor({
@@ -123,8 +127,10 @@ const useCustomEditor = (title:string,content: string | {}) => {
         ],
         content: content,
         onBlur: async ({editor})=>{
-            const json = editor.getJSON()
-            await updateContentToDB({title, content:json});
+            if(!notSave){
+                const json = editor.getJSON()
+                await updateContentToDB({title, content:json});
+            }
         },
     });
 
@@ -134,7 +140,7 @@ const useCustomEditor = (title:string,content: string | {}) => {
         }
     });
 
-    useKeyPress(['Meta', 'i'], (event:KeyboardEvent)=>{
+    useKeyPress(['Meta', 'j'], (event:KeyboardEvent)=>{
         if(editor){
             hotKeyAddImage(editor);
         }
