@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import classes from "./Hello.module.css";
-import Directions from "../../pages/directions";
+import Directions from "./Directions";
 
 const Hello: FC = () => {
 
