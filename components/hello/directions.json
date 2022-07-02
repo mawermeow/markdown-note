@@ -4,7 +4,7 @@
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 2
       },
       "content": [
@@ -17,7 +17,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -93,13 +93,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 2
       },
       "content": [
@@ -112,7 +112,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -124,7 +124,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -154,13 +154,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -172,13 +172,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -221,13 +221,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 2
       },
       "content": [
@@ -240,7 +240,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -252,7 +252,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -264,13 +264,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 3
       },
       "content": [
@@ -291,7 +291,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -342,13 +342,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 3
       },
       "content": [
@@ -369,7 +369,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -381,7 +381,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -457,7 +457,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -469,13 +469,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 3
       },
       "content": [
@@ -691,13 +691,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       },
       "content": [
         {
@@ -709,13 +709,13 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 3
       },
       "content": [
@@ -875,31 +875,67 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
+      }
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": "start",
+        "level": 2
       },
       "content": [
         {
           "type": "text",
-          "text": "如果你覺得哪裡不夠方便，也歡迎隨時告訴我唷！"
+          "text": "行動裝置的使用者"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "使用行動裝置編輯較長的文件時，點擊螢幕上方約三分之一的位置開啟鍵盤，即可保持工具列依舊處於畫面中。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "若要編輯的資料處於文件最底部，可以先增加幾行空白行，再依上述執行即可。"
+            }
+          ]
         }
       ]
     },
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": "left"
+        "textAlign": "start"
       }
     },
     {
       "type": "heading",
       "attrs": {
-        "textAlign": "left",
+        "textAlign": "start",
         "level": 2
       },
       "content": [
@@ -940,7 +976,7 @@
               "content": [
                 {
                   "type": "text",
-                  "text": "新增 "
+                  "text": "新增 "
                 },
                 {
                   "type": "text",
@@ -953,7 +989,7 @@
                 },
                 {
                   "type": "text",
-                  "text": "與 "
+                  "text": "與 "
                 },
                 {
                   "type": "text",
@@ -1063,12 +1099,6 @@
           ]
         }
       ]
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": "left"
-      }
     }
   ]
 }
