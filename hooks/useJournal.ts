@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import JournalContext from "../store/JournalContext";
 import {JournalData} from "../types/Journal";
 import {getSession} from "next-auth/client";
@@ -8,10 +8,7 @@ const useJournal= ()=>{
     const {journals, renderJournals, updateStatus,renderUsername,
         renderUserToolbar, deleteHolder, updateDeleteHolder} = useContext(JournalContext);
 
-    const [ hasDatabase, setHasDatabase ] = useState(true);
-    const [ localMoreNew, setLocalMoreNew ] = useState(false);
-
-    const localStorageCoverDB=async (localJournals:JournalData[])=>{
+    const localStorageReplaceDB=async (localJournals:JournalData[])=>{
         const timestamp = getTimestamp();
 
         const res = await fetch('/api/user/set-journals',{
@@ -26,16 +23,22 @@ const useJournal= ()=>{
         }
     };
 
-    const getLocalStorageData=()=>{
-        const localJournalsSrc = localStorage.getItem('journals');
-        const localToolbarsSrc = localStorage.getItem('toolbars');
-        const localTimestampSrc = localStorage.getItem('timestamp');
-        const localUsernameSrc = localStorage.getItem('username');
+    const getJsonParse=(key:string)=>{
+        const localSrc = localStorage.getItem(key);
+        return localSrc&&JSON.parse(localSrc);
+    };
 
-        const localJournals:JournalData[]=localJournalsSrc&&JSON.parse(localJournalsSrc);
-        const localToolbars:string[]= localToolbarsSrc&&JSON.parse(localToolbarsSrc);
-        const localTimestamp:number = localTimestampSrc&&JSON.parse(localTimestampSrc);
-        const localUsername:string = localUsernameSrc&&JSON.parse(localUsernameSrc);
+    const getLocalStorageData=()=>{
+        const localJournals:JournalData[]=getJsonParse('journals');
+        const localToolbars:string[]= getJsonParse('toolbars');
+        const localTimestamp:number = getJsonParse('timestamp');
+        const localUsername:string = getJsonParse('username');
+
+        return {localJournals, localToolbars, localTimestamp, localUsername};
+    }
+
+    const renderLocalStorageData=()=>{
+        const {localJournals, localToolbars, localTimestamp, localUsername} = getLocalStorageData();
 
         if(localJournals&& localToolbars&& localTimestamp&& localUsername){
             renderJournals(localJournals);
@@ -45,23 +48,23 @@ const useJournal= ()=>{
         }
 
         return {localJournals, localTimestamp}
-    }
+    };
 
 
     const getUserData = async ()=>{
         updateStatus({status:'pending',message:'Getting notes...'});
-        const {localJournals, localTimestamp} = getLocalStorageData();
+
+        const {localJournals, localTimestamp} = renderLocalStorageData();
 
         const res = await fetch('/api/user/get-journals');
         const data = await res.json();
         if(!res.ok){
-            // updateStatus({status:'error',message:data.message});
             updateStatus({status: 'error', message: 'Can not connect to Database.'});
             return;
         }
 
         if(localTimestamp && localTimestamp == data.timestamp){
-            await localStorageCoverDB(localJournals);
+            await localStorageReplaceDB(localJournals);
             return;
         }
 
@@ -94,9 +97,10 @@ const useJournal= ()=>{
     )=>{
         updateStatus({status:'pending',message:`${action[0]} ${title}...`});
 
-        const timestamp = getTimestamp();
         localStorage.setItem('journals',JSON.stringify(newJournals));
         renderJournals(newJournals);
+
+        const timestamp = getTimestamp();
 
         const res = await fetch('/api/user/set-journals',{
             method: 'PATCH',
@@ -160,9 +164,9 @@ const useJournal= ()=>{
 
     const delNoteToDB = async ()=>{
         if(journals && deleteHolder){
+            updateDeleteHolder('');
             const newJournals = journals.filter(journal=>journal.title!==deleteHolder);
             await fetchSetJournals(newJournals, deleteHolder, ['Deleting', 'Deleted']);
-            updateDeleteHolder('');
         }
     };
 

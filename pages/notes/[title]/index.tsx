@@ -26,7 +26,7 @@ const NotePage = () => {
     return <>
         {head}
         <EditorsCard contents={journals}
-                 readTag={typeof noteTitle==='string'? noteTitle:undefined}/>;
+                 readTag={typeof noteTitle==='string'? noteTitle:undefined}/>
     </>
 };
 

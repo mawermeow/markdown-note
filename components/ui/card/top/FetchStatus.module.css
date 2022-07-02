@@ -4,7 +4,8 @@
     display: flex;
     text-align: center;
     padding-right: 4px;
-    margin: 5px 0;
+    margin: 5px auto;
+    justify-content: flex-end;
 }
 .editorStatus::before {
     background: var(--color-base-background-color);

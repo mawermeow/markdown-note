@@ -12,8 +12,8 @@ const NoteDeleteForm:FC = () =>{
 
     const submitHandler= async (event:FormEvent)=>{
         event.preventDefault();
-        await delNoteToDB();
         await router.replace('/notes');
+        await delNoteToDB();
     };
 
     return <div className={classes.noteDeleteForm}>
