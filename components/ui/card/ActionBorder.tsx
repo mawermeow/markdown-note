@@ -11,7 +11,7 @@ const ActionBorder:FC<ActionBorderProps> = (props) =>{
     const {children, notSticky} = props;
 
     const { observe, inView } = useInView({
-        rootMargin: '0px 0px -1px 0px',
+        rootMargin: '-1px 0px 0px 0px',
         threshold: [1],
     })
 

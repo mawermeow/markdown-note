@@ -22,3 +22,23 @@
     color: var(--color-sidebar-cell-text-color);
     cursor: pointer;
 }
+
+.formAction{
+    background: var(--color-base-background-color);
+    border-top: 3px solid var(--color-sidebar-background-color);
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    /*flex-wrap: wrap;*/
+    font-weight: 600;
+    padding: 0.25rem 3.82%;
+    white-space: nowrap;
+    width: 100%;
+    position: sticky;
+    /*top: 0;*/
+    /*z-index: 1;*/
+
+}

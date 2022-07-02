@@ -8,6 +8,7 @@ import TopBorder from "../ui/card/top/TopBorder";
 import MainBorder from "../ui/card/MainBorder";
 import MainFormBorder from "../ui/form/MainFormBorder";
 import JournalContext from "../../store/JournalContext";
+import TopButtonDiv from "../ui/card/top/TopButtonDiv";
 
 const changeUserPassword = async (oldPassword: string, newPassword: string) => {
     const response = await fetch('/api/user/change-password', {
@@ -55,7 +56,8 @@ const UserForm: FC = () => {
         </ContentCard>
         <ContentCard>
         <TopBorder>
-            <div>
+            <FetchStatus/>
+            <TopButtonDiv>
                 <TopButton
                     isActive={true}
                 >CHANGE PASSWORD
@@ -68,8 +70,7 @@ const UserForm: FC = () => {
                     }}>
                     Sign Out
                 </TopButton>
-            </div>
-            <FetchStatus/>
+            </TopButtonDiv>
         </TopBorder>
             <MainFormBorder isLeft={true} isVisible={true} onSubmit={changePasswordHandler}
                             buttonValue='Change'

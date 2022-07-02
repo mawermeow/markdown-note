@@ -70,6 +70,7 @@ const EditorsCard: FC<MarkdownCardProps> = (props) => {
                            setTitleFormVisible(false)
                        }} />
         <TopBorder>
+            <FetchStatus/>
             <TopButtonDiv>
                 {topButtonList}
                 <TopButton isActive={false} onClick={()=> {
@@ -82,7 +83,6 @@ const EditorsCard: FC<MarkdownCardProps> = (props) => {
                 }
                 }>+</TopButton>
             </TopButtonDiv>
-            <FetchStatus/>
         </TopBorder>
         {editorList}
         <NoteDeleteForm/>

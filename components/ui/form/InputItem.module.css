@@ -5,6 +5,7 @@
     position: relative;
     margin-bottom: 20px;
 }
+
 .inputItem input{
     width: 100%;
     height: 46px;
@@ -16,7 +17,8 @@
     text-align: center;
     color:var(--color-title-text-color);
 }
-.inputItem > label{
+
+.inputItem label{
     position: absolute;
     top: 0;
     left: 50%;
@@ -25,6 +27,7 @@
     transform: translateY(13px) translateX(-50%);
     transition: transform .25s ease-in-out;
     transform-origin: 0 100%;
+    white-space:pre;
 }
 .inputItem input:focus{
     border-bottom: 1px solid var(--color-title-text-color);
@@ -55,10 +58,10 @@
 }
 
 @media (max-width: 250px) {
-    .inputItem > label {
+    .inputItem  label {
         left: calc(50% - 12px);
     }
-    .inputItem > label > span{
+    .inputItem  label > span{
         display: none;
     }
 }

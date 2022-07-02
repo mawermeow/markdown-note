@@ -6,6 +6,7 @@ import {EditorContent} from "@tiptap/react";
 import Toolbar from "./Toolbar";
 import FloatingList from "./FloatingList";
 import BubbleList from "./BubbleList";
+import ToolbarSelectForm from "../form/ToolbarSelectForm";
 
 type EditorProps = {
     title:string,
@@ -20,12 +21,14 @@ const Editor: React.FC<EditorProps> = (props) => {
 
     return (
         <>
+            <ActionBorder>
+                {editor && <Toolbar title={title} editor={editor}/>}
+                <ToolbarSelectForm/>
+            </ActionBorder>
             {editor && <BubbleList editor={editor}/>}
             {editor && <FloatingList editor={editor}/>}
             <EditorContent className={classes.editorContent} editor={editor}/>
-            <ActionBorder>
-                {editor && <Toolbar title={title} editor={editor}/>}
-            </ActionBorder>
+
         </>
     )
 }

@@ -1,9 +1,10 @@
 .editorStatus {
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     text-align: center;
     padding-right: 4px;
+    margin: 5px 0;
 }
 .editorStatus::before {
     background: var(--color-base-background-color);

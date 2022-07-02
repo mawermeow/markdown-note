@@ -8,6 +8,7 @@ import TopButton from "../ui/card/top/TopButton";
 import TopBorder from "../ui/card/top/TopBorder";
 import MainFormBorder from "../ui/form/MainFormBorder";
 import JournalContext from "../../store/JournalContext";
+import TopButtonDiv from "../ui/card/top/TopButtonDiv";
 
 
 const createUser=async (username:string, password:string)=>{
@@ -76,7 +77,8 @@ const LoginForm: FC = () => {
 
     return <ContentCard>
         <TopBorder>
-            <div>
+            <FetchStatus/>
+            <TopButtonDiv>
                 <TopButton
                     isActive={isLoginMode}
                     onClick={()=>{setIsLoginMode(true)}}>
@@ -87,8 +89,7 @@ const LoginForm: FC = () => {
                     onClick={()=>{setIsLoginMode(false)}}>
                     Signup
                 </TopButton>
-            </div>
-            <FetchStatus/>
+            </TopButtonDiv>
         </TopBorder>
         <MainFormBorder isLeft={isLoginMode} isVisible={true} onSubmit={submitHandler}
                         buttonValue={isLoginMode ?'Login':'Sign Up'}>

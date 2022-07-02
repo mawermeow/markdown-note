@@ -1,8 +1,8 @@
 .actionBorder{
     background: var(--color-base-background-color);
-    border-top: 3px solid var(--color-sidebar-background-color);
-    border-bottom-left-radius: 0.75rem;
-    border-bottom-right-radius: 0.75rem;
+    border-bottom: 3px solid var(--color-sidebar-background-color);
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -10,19 +10,14 @@
     font-size: 12px;
     flex-wrap: wrap;
     font-weight: 600;
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 3.82%;
     white-space: nowrap;
     width: 100%;
-    height: 40px;
     position: sticky;
-    bottom: 0;
+    top: 0;
     z-index: 1;
 }
 
-.notSticky{
+.notSticky {
     position: initial;
-}
-
-.actionBorder.sticky {
-    border-bottom: 2px solid transparent;
 }

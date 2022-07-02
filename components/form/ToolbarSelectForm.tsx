@@ -12,12 +12,9 @@ const ToolbarSelectForm:FC = () =>{
         canDisabled={tool.name} key={tool.name} value={tool.icon} onClick={() => toggleTool(tool.name)}/>);
 
     return <>
-        <MainBorder isLeft={false} isVisible={isToolbarSetMode}>
-            <div className={classes.toolbarSelectForm}>
+            <div className={`${classes.toolbarSelectForm} ${isToolbarSetMode?'':classes.isNotVisible}`}>
                 {allToolbarMenu}
             </div>
-
-        </MainBorder>
     </>
 };
 
