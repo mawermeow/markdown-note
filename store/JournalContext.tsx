@@ -63,7 +63,7 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
         setJournalStatus(newStatus);
     };
 
-    const [showStatusMessage,setShowStatusMessage]=useState(false);
+    const [showStatusMessage,setShowStatusMessage]=useState(true);
     const toggleShowStatusMessage=()=>{
         setShowStatusMessage(prev=>!prev);
     };

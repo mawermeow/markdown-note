@@ -10,25 +10,6 @@ import MainFormBorder from "../ui/form/MainFormBorder";
 import JournalContext from "../../store/JournalContext";
 import TopButtonDiv from "../ui/card/top/TopButtonDiv";
 
-
-const createUser=async (username:string, password:string)=>{
-    const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    const data:{message:string} = await response.json();
-
-    if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong!');
-    }
-
-    return data;
-};
-
-
 const LoginForm: FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -43,26 +24,37 @@ const LoginForm: FC = () => {
             username,
             password
         });
-        if (result && !result.ok) {
-            updateStatus({status:'error',message:'Failed, please try again'});
-            // setFetchStatus({status:'error',message:result.error});
+        if (result && !result.error) {
+            updateStatus({status:'success',message:'Login successfully'});
+            await router.replace('/notes');
+
+        }else{
+            updateStatus({status:'error',message:result?.error||'Failed, please try again'});
         }
-        updateStatus({status:'success',message:'Login successfully'});
-        await router.replace('/notes');
+        return;
+
 
     };
 
     const signupHandler = async () => {
-        try{
-            updateStatus({status:'pending',message:'Registering...'});
-            await createUser(username,password);
+        updateStatus({status:'pending',message:'Registering...'});
+
+        const response = await fetch('/api/auth/signup', {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data:{message:string} = await response.json();
+
+        if (response.ok) {
             updateStatus({status:'success',message:'Registration is complete'});
             setIsLoginMode(true);
             await loginHandler();
-        }catch (error) {
-            if (error instanceof Error){
-                updateStatus({status:'error',message:error.message});
-            }
+        }else{
+            console.log(data)
+            updateStatus({status:'error',message:data.message});
         }
     };
 
@@ -71,13 +63,14 @@ const LoginForm: FC = () => {
 
         if(!isLoginMode){
             await signupHandler()
+        }else{
+            await loginHandler();
         }
-        await loginHandler();
     };
 
     return <ContentCard>
-        <TopBorder>
             <FetchStatus/>
+        <TopBorder>
             <TopButtonDiv>
                 <TopButton
                     isActive={isLoginMode}
@@ -100,7 +93,12 @@ const LoginForm: FC = () => {
                 value={username}
                 onChange={(input) => {
                     setUsername(input);
-                    updateStatus({status:'',message:''});
+                    if(username.length<4){
+                        updateStatus({status:'error',message:'username is too short'});
+                    }else{
+                        updateStatus({status:'',message:''});
+                    }
+
                 }}
             />
             <InputItem
@@ -110,7 +108,11 @@ const LoginForm: FC = () => {
                 value={password}
                 onChange={(input) => {
                     setPassword(input);
-                    updateStatus({status:'',message:''});
+                    if(password.length<7){
+                        updateStatus({status:'error',message:'password is too short'});
+                    }else{
+                        updateStatus({status:'',message:''});
+                    }
                 }}
             />
         </MainFormBorder>
