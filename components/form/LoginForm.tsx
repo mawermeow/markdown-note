@@ -42,7 +42,7 @@ const LoginForm: FC = () => {
             username,
             password
         });
-        if (result && result.error) {
+        if (result && !result.ok) {
             updateStatus({status:'error',message:'Failed, please try again'});
             // setFetchStatus({status:'error',message:result.error});
         }
