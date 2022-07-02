@@ -30,7 +30,7 @@
 
 .container section {
     font-size: 1.8rem;
-    padding: 25px;
+    padding: 25px 0;
     background: var(--color-background-text-color);
     color: var(--color-base-text-color);
 }
