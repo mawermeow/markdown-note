@@ -44,7 +44,7 @@ const handler = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
         username: username,
         password: hashedPassword,
         journals:[{title:'Daily',content:''},{title:'Monthly',content:''},{title:'Future',content:''}],
-        toolbars:['', 'bold', 'italic', 'strike', 'clear', 'divider1', 'orderedList', 'bulletList', 'taskList', 'blockQuote', 'divider2', 'horizon', 'link', 'divider3'],
+        toolbars:["","bold","italic","strike","alignLeft","alignCenter","divider1","undo"],
     });
 
     res.status(201).json({ message: 'account registration completed' });

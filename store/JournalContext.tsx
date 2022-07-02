@@ -73,7 +73,7 @@ export const JournalContextProvider:FC<JournalContextProviderProps> = (props) =>
         setUsername(journalOwner);
     }
 
-    const [userToolbar,setUserToolbar] = useState(['', 'bold', 'italic', 'strike', 'clear', 'divider1', 'orderedList', 'bulletList', 'taskList', 'blockQuote', 'divider2', 'horizon', 'link', 'divider3']);
+    const [userToolbar,setUserToolbar] = useState(["","bold","italic","strike","alignLeft","alignCenter","divider1","undo"]);
     const renderUserToolbar=(newToolbar:string[])=>{
         setUserToolbar(newToolbar);
     }
