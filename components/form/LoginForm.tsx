@@ -53,7 +53,6 @@ const LoginForm: FC = () => {
             setIsLoginMode(true);
             await loginHandler();
         }else{
-            console.log(data)
             updateStatus({status:'error',message:data.message});
         }
     };
