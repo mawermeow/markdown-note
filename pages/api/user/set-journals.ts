@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import checkUserAuth from "../../../lib/checkUserAuth";
+import checkUserAuth from "./checkUserAuth";
 
 async function handler(req:NextApiRequest, res:NextApiResponse) {
     if (req.method !== 'PATCH') {
@@ -19,13 +19,13 @@ async function handler(req:NextApiRequest, res:NextApiResponse) {
                 {$set: {journals: newJournals,timestamp}}
             );
         }
+
         if(newToolbars){
             await usersCollection.updateOne(
                 {username:username},
                 {$set: {toolbars: newToolbars,timestamp}}
             );
         }
-
 
         await client.close();
         res.status(200).json({ message: 'Journals updated!' });

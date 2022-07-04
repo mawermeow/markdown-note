@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
-import { verifyPassword } from '../../../lib/auth';
+import { verifyPassword } from '../../../lib/password';
 import { connectToDatabase } from '../../../lib/database';
 
 type credentials = {

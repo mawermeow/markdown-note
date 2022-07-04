@@ -2,7 +2,7 @@ import {describe, it, expect, vi} from 'vitest';
 import {createMocks} from 'node-mocks-http';
 import signup from "./signup";
 import {connectToDatabase} from '../../../lib/database';
-import {hashPassword} from "../../../lib/auth";
+import {hashPassword} from "../../../lib/password";
 
 const validUsername = 'mawer';
 const validPassword = '12345678';

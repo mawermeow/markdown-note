@@ -22,42 +22,42 @@ If you have tried all the note-taking software you have heard, you are welcome t
 It is a markdown-like rich text note with many additional functions, all additional functions are done through shortcut keys, toolbars or special menus.
 
 ### Status Indicator
-![](https://media.giphy.com/media/O8GpZT879zZeO1cs1r/giphy.gif)
+![](https://media.giphy.com/media/d8YVjnAWSDAW768I3a/giphy.gif)
 
 It is at the top right of the screen and will display the detailed information returned by fetch. If you find it annoying, you can click to close the text section, leaving it just a small dot.
 
 ### Change Title
 
-![](https://media.giphy.com/media/VncacSxMgLOHzLEOaR/giphy.gif)
+![](https://media.giphy.com/media/BOmyon6nB9dGtVQqFT/giphy.gif)
 
 Click the active note label to edit the title.
 
 ### Toolbar
 
-![](https://media.giphy.com/media/dowuWQY6EfuRPF1E34/giphy.gif)
-![](https://media.giphy.com/media/He02ACSfKwilEwiQUx/giphy.gif)
+![](https://media.giphy.com/media/1HVVwwlRvpARIGxiCJ/giphy.gif)
+![](https://media.giphy.com/media/I71wuuNRdLRHGYTzhT/giphy.gif)
 
 The toolbar will float at the top of the window and can be edited and saved via the gear icon.
 
 Note that the keyboard of the phone may make the toolbar error, please click the upper half of the screen to enter the editing mode to prevent this problem.
 
 ### Save
-![](https://media.giphy.com/media/FfZlTmGBqWbnMOnp1q/giphy.gif)
+![](https://media.giphy.com/media/klVYlmzplZeC0irgIP/giphy.gif)
 
 You can use the save button in the toolbar or click outside the editor's window to save.
 
-### Image
-![](https://media.giphy.com/media/yBssSAcoFXNFxrho9p/giphy.gif)
-
-After copying the image URL, click `Meta`+`J` on the keyboard to paste it directly, or use the image icon in the toolbar to paste the image URL.
-
 ### Delete
-![](https://media.giphy.com/media/EifXYjGCBfJKzPd3hn/giphy.gif)
+![](https://media.giphy.com/media/nit7BFMRZzB8gtIj3E/giphy.gif)
 
 Click the delete icon and confirm to delete the note.
 
+### Image
+![](https://media.giphy.com/media/tgTG860Z42c8LjQLTp/giphy.gif)
+
+After copying the image URL, click `Meta`+`J` on the keyboard to paste it directly, or use the image icon in the toolbar to paste the image URL.
+
 ### Link
-![](https://media.giphy.com/media/RgGyR6Q3Yt91bRjKhQ/giphy.gif)
+![](https://media.giphy.com/media/jaRu5sniNIIWIYGp6y/giphy.gif)
 
 After copying the link, select the text you want to inject the link, and then click `Meta`+`K` on the keyboard to paste it directly, or use the link icon in the toolbar to paste the URL.
 

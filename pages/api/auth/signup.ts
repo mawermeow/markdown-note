@@ -1,4 +1,4 @@
-import { hashPassword } from '../../../lib/auth';
+import { hashPassword } from '../../../lib/password';
 import { connectToDatabase } from '../../../lib/database';
 import type { NextApiRequest, NextApiResponse } from 'next'
 

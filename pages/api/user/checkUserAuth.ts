@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/client';
-import { connectToDatabase } from './database';
+import { connectToDatabase } from '../../../lib/database';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 async function handler(req:NextApiRequest, res:NextApiResponse) {

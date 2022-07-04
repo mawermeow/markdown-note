@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import searchUser from "../../../lib/checkUserAuth";
+import checkUserAuth from "./checkUserAuth";
 
 async function handler(req:NextApiRequest, res:NextApiResponse) {
     console.log(req)
@@ -8,9 +8,9 @@ async function handler(req:NextApiRequest, res:NextApiResponse) {
         return;
     }
 
-    const isUser = await searchUser(req, res);
+    const isUser = await checkUserAuth(req, res);
     if(isUser){
-        const {client, usersCollection, user, username} = isUser;
+        const {client, user, username} = isUser;
 
         const journals = user.journals;
         const toolbars = user.toolbars;

@@ -13,24 +13,25 @@ const useJournal= ()=>{
 
         const res = await fetch('/api/user/set-journals',{
             method: 'PATCH',
-            body: JSON.stringify({newJournals:localJournals,timestamp}),
+            body: JSON.stringify({newJournals:localJournals, timestamp}),
             headers: {
                 'Content-Type': 'application/json',
             },
         });
         if(res.ok){
-            updateStatus({status:'success',message:'Saved notes successfully'});
+            localStorage.setItem('timestamp', JSON.stringify(timestamp));
+            updateStatus({ status:'success', message:'Saved notes successfully' });
         }
     };
 
     const getJsonParse=(key:string)=>{
         const localSrc = localStorage.getItem(key);
-        return localSrc&&JSON.parse(localSrc);
+        return localSrc && JSON.parse(localSrc);
     };
 
     const getLocalStorageData=()=>{
-        const localJournals:JournalData[]=getJsonParse('journals');
-        const localToolbars:string[]= getJsonParse('toolbars');
+        const localJournals:JournalData[] = getJsonParse('journals');
+        const localToolbars:string[] = getJsonParse('toolbars');
         const localTimestamp:number = getJsonParse('timestamp');
         const localUsername:string = getJsonParse('username');
 
@@ -40,11 +41,11 @@ const useJournal= ()=>{
     const renderLocalStorageData=()=>{
         const {localJournals, localToolbars, localTimestamp, localUsername} = getLocalStorageData();
 
-        if(localJournals&& localToolbars&& localTimestamp&& localUsername){
+        if(localJournals && localToolbars && localTimestamp && localUsername){
+            updateStatus({status: 'pending', message: 'Loaded local notes...'});
             renderJournals(localJournals);
             renderUserToolbar(localToolbars);
             renderUsername(localUsername);
-            updateStatus({status: 'pending', message: 'Loaded local notes...'});
         }
 
         return {localJournals, localTimestamp}
@@ -74,7 +75,7 @@ const useJournal= ()=>{
         localStorage.setItem('journals',JSON.stringify(data.journals));
         localStorage.setItem('username',JSON.stringify(data.username));
         localStorage.setItem('toolbars',JSON.stringify(data.toolbars));
-        localStorage.setItem('timestamp',JSON.stringify(data.timestamp));
+
         updateStatus({status:'success',message:'Take notes successfully'});
 
     };
@@ -109,7 +110,6 @@ const useJournal= ()=>{
                 'Content-Type': 'application/json',
             },
         });
-        // const data = await res.json();
 
         if(!res.ok){
             updateStatus({status:'error',message:`${action[0]} error, ${title} saved locally`});
