@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Editor} from "@tiptap/react/dist/packages/react/src/Editor";
 import classes from "./Toolbar.module.css";
-import {addImage, addLink, clickAlignHandler} from "../../lib/editorLib";
+import {addImage, addLink} from "../../lib/editorLib";
 import JournalContext from "../../store/JournalContext";
 import {useContext} from "react";
 
@@ -35,7 +35,7 @@ import {
     RiLayoutLeft2Line,
     RiLayoutTop2Line,
     RiAlignCenter,
-    RiDeleteBinLine, RiIndentDecrease, RiIndentIncrease, RiAlignLeft, RiAlignRight, RiFileList2Line, RiRestartLine,
+    RiDeleteBinLine, RiIndentDecrease, RiIndentIncrease, RiAlignLeft, RiAlignRight, RiFileList2Line
 } from 'react-icons/ri'
 import ActionIcon from "../ui/card/ActionIcon";
 import ActionDivider from "../ui/card/ActionDivider";
@@ -92,14 +92,6 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'tab', icon:<RiIndentIncrease />, method:() => editor.commands.sinkListItem('listItem')},
         {name:'shiftTab', icon:<RiIndentDecrease />, method:() => editor.commands.liftListItem('listItem')},
         {name:'console.log(json)', icon:<RiFileList2Line />, method:() => console.log(editor.getJSON())},
-        {name:'restart', icon:<RiRestartLine />, method:async () => {
-            await getUserData();
-            const content = journals?.some(journal=> {
-                if(journal.title === title){
-                    editor.commands.setContent(journal.content);
-                }
-            });
-        }},
     ];
 
     const allToolbarMenu = allToolbarList.map(tool=> <ActionIcon
