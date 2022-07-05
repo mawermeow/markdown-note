@@ -131,7 +131,7 @@ const useCustomEditor = (
                 const json = editor.getJSON()
                 await updateContentToDB({title, content:json});
             }
-        },
+        }
     });
 
     useKeyPress(['Meta', 'k'], (event:KeyboardEvent)=>{

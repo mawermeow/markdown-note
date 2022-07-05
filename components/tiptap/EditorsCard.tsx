@@ -8,14 +8,13 @@ import NoteTitleForm from "../form/NoteTitleForm";
 import {JournalData} from "../../types/Journal";
 import Editor from "./Editor";
 import NoteDeleteForm from "../form/NoteDeleteForm";
-import ToolbarSelectForm from "../form/ToolbarSelectForm";
 import {useRouter} from "next/router";
 import TopButtonDiv from "../ui/card/top/TopButtonDiv";
 
 
-type LogProps = { title: string, content: string | {} };
+// type LogProps = { title: string, content: string | {} };
 type MarkdownCardProps = {
-    contents: LogProps[],
+    contents: JournalData[],
     readTag?:string,
 };
 

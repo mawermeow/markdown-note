@@ -35,7 +35,7 @@ import {
     RiLayoutLeft2Line,
     RiLayoutTop2Line,
     RiAlignCenter,
-    RiDeleteBinLine, RiIndentDecrease, RiIndentIncrease, RiAlignLeft, RiAlignRight, RiFileList2Line,
+    RiDeleteBinLine, RiIndentDecrease, RiIndentIncrease, RiAlignLeft, RiAlignRight, RiFileList2Line, RiRestartLine,
 } from 'react-icons/ri'
 import ActionIcon from "../ui/card/ActionIcon";
 import ActionDivider from "../ui/card/ActionDivider";
@@ -50,9 +50,9 @@ type ToolbarProps = {
 }
 
 const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
-    const {updateToolbarMenu,toggleTool, deleteHolder, updateDeleteHolder} = useContext(JournalContext);
+    const {journals,updateToolbarMenu,toggleTool, deleteHolder, updateDeleteHolder} = useContext(JournalContext);
     const {userToolbar, isToolbarSetMode, saveToolbarSetting} = useToolbar();
-    const {updateContentToDB} = useJournal();
+    const {updateContentToDB, getUserData} = useJournal();
 
     const allToolbarList:ToolBoxItem[] = [
         {name:'bold', icon:<RiBold />, method:() => editor.chain().focus().toggleBold().run()},
@@ -92,6 +92,14 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
         {name:'tab', icon:<RiIndentIncrease />, method:() => editor.commands.sinkListItem('listItem')},
         {name:'shiftTab', icon:<RiIndentDecrease />, method:() => editor.commands.liftListItem('listItem')},
         {name:'console.log(json)', icon:<RiFileList2Line />, method:() => console.log(editor.getJSON())},
+        {name:'restart', icon:<RiRestartLine />, method:async () => {
+            await getUserData();
+            const content = journals?.some(journal=> {
+                if(journal.title === title){
+                    editor.commands.setContent(journal.content);
+                }
+            });
+        }},
     ];
 
     const allToolbarMenu = allToolbarList.map(tool=> <ActionIcon
@@ -132,7 +140,6 @@ const Toolbar:FC<ToolbarProps> = ({title,editor,setComponent}) =>{
             {customToolbarMenu}
             <ActionIcon value={<RiSettings3Line/>} onClick={saveToolbarSetting}/>
         </>}
-        {/*{ setComponent && isToolbarSetMode && allToolbarMenu }*/}
     </div>
     </>
 };

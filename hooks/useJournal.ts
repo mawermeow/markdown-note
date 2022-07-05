@@ -11,6 +11,7 @@ const useJournal= ()=>{
     const localStorageReplaceDB=async (localJournals:JournalData[])=>{
         const timestamp = getTimestamp();
 
+        updateStatus({status:'pending',message:'Upload new note...'});
         const res = await fetch('/api/user/set-journals',{
             method: 'PATCH',
             body: JSON.stringify({newJournals:localJournals, timestamp}),
@@ -18,22 +19,27 @@ const useJournal= ()=>{
                 'Content-Type': 'application/json',
             },
         });
+
         if(res.ok){
-            localStorage.setItem('timestamp', JSON.stringify(timestamp));
-            updateStatus({ status:'success', message:'Saved notes successfully' });
+            setLocalStorage('timestamp', timestamp);
+            updateStatus({status:'success',message:'New note uploaded'});
         }
     };
 
-    const getJsonParse=(key:string)=>{
+    const getLocalStorage=(key:string)=>{
         const localSrc = localStorage.getItem(key);
         return localSrc && JSON.parse(localSrc);
     };
 
+    const setLocalStorage=(key:string, value:any)=>{
+        localStorage.setItem(key,JSON.stringify(value));
+    };
+
     const getLocalStorageData=()=>{
-        const localJournals:JournalData[] = getJsonParse('journals');
-        const localToolbars:string[] = getJsonParse('toolbars');
-        const localTimestamp:number = getJsonParse('timestamp');
-        const localUsername:string = getJsonParse('username');
+        const localJournals:JournalData[] = getLocalStorage('journals');
+        const localToolbars:string[] = getLocalStorage('toolbars');
+        const localTimestamp:number = getLocalStorage('timestamp');
+        const localUsername:string = getLocalStorage('username');
 
         return {localJournals, localToolbars, localTimestamp, localUsername};
     }
@@ -47,24 +53,23 @@ const useJournal= ()=>{
             renderUserToolbar(localToolbars);
             renderUsername(localUsername);
         }
-
-        return {localJournals, localTimestamp}
     };
 
 
     const getUserData = async ()=>{
+        const {localJournals, localTimestamp} = getLocalStorageData();
+
         updateStatus({status:'pending',message:'Getting notes...'});
-
-        const {localJournals, localTimestamp} = renderLocalStorageData();
-
         const res = await fetch('/api/user/get-journals');
         const data = await res.json();
         if(!res.ok){
             updateStatus({status: 'error', message: 'Can not connect to Database.'});
+            renderLocalStorageData();
             return;
         }
 
-        if(localTimestamp && localTimestamp == data.timestamp){
+        if(localTimestamp && localTimestamp === data.timestamp){
+            renderLocalStorageData();
             await localStorageReplaceDB(localJournals);
             return;
         }
@@ -72,12 +77,13 @@ const useJournal= ()=>{
         renderJournals(data.journals);
         renderUsername(data.username);
         renderUserToolbar(data.toolbars);
-        localStorage.setItem('journals',JSON.stringify(data.journals));
-        localStorage.setItem('username',JSON.stringify(data.username));
-        localStorage.setItem('toolbars',JSON.stringify(data.toolbars));
+        setLocalStorage('journals',data.journals);
+        setLocalStorage('username',data.username);
+        setLocalStorage('toolbars',data.toolbars);
+        setLocalStorage('timestamp',data.timestamp);
 
         updateStatus({status:'success',message:'Take notes successfully'});
-
+        return localJournals;
     };
 
     useEffect(()=>{
@@ -98,7 +104,7 @@ const useJournal= ()=>{
     )=>{
         updateStatus({status:'pending',message:`${action[0]} ${title}...`});
 
-        localStorage.setItem('journals',JSON.stringify(newJournals));
+        setLocalStorage('journals', newJournals);
         renderJournals(newJournals);
 
         const timestamp = getTimestamp();
@@ -114,7 +120,7 @@ const useJournal= ()=>{
         if(!res.ok){
             updateStatus({status:'error',message:`${action[0]} error, ${title} saved locally`});
         }else{
-            localStorage.setItem('timestamp',timestamp.toString());
+            setLocalStorage('timestamp',timestamp.toString());
             updateStatus({status:'success',message:`${action[1]} ${title} successfully!`});
         }
     };
@@ -170,7 +176,7 @@ const useJournal= ()=>{
         }
     };
 
-    return {journals, addNewNoteToDB, updateContentToDB, delNoteToDB, updateTitleToDB};
+    return {journals, addNewNoteToDB, updateContentToDB, delNoteToDB, updateTitleToDB, getUserData};
 }
 
 export default useJournal;
