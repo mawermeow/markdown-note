@@ -92,7 +92,7 @@ const LoginForm: FC = () => {
                 value={username}
                 onChange={(input) => {
                     setUsername(input);
-                    if(username.length<4){
+                    if(username.length<3){
                         updateStatus({status:'error',message:'username is too short'});
                     }else{
                         updateStatus({status:'',message:''});

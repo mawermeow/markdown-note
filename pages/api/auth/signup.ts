@@ -16,7 +16,7 @@ const handler = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
 
     if (
         !username ||
-        username.trim().length < 4 ||
+        username.trim().length < 3 ||
         !password ||
         password.trim().length < 7
     ) {

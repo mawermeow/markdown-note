@@ -12,7 +12,7 @@ vi.mock("../../../lib/form");
 let callInsertOne = false;
 
 
-vi.mock("../../../lib/auth",()=>{
+vi.mock("../../../lib/password",()=>{
     return {
         hashPassword: vi.fn(),
     }
